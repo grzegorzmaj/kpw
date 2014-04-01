@@ -1,0 +1,343 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Szablon ksi¹¿ki
+% Autor: Tomasz Kubik
+% udostêpniany na prawach CreativeCommons: SA-BY-NC
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[a4paper,11pt,polish]{memoir}
+% acelnosxz
+% ±æê³ñó¶¼¿
+% ¡ÆÊ£ÑÓ¦¬¯
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%    Pakiety podstawowe                                  %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage[cp1250]{inputenc} %ustawienie kodowania znaków
+\usepackage[T1]{fontenc}
+\usepackage{pslatex}
+\usepackage[polish]{babel}
+\usepackage{tabularx}
+\usepackage{multicol}
+\usepackage{color,colortbl}
+\usepackage{calc,soul,fourier}
+\usepackage{setspace}
+\usepackage{indentfirst}
+\usepackage{type1cm,eso-pic}
+\usepackage{ifpdf}
+\usepackage{amsmath}  
+\usepackage{listings}
+\usepackage{longtable}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%    Pakiety dodatkowe                                   %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\RequirePackage[caption=false,position=bottom]{subfig} 
+%\let\subbottom\subfloat
+%\usepackage[version=3]{mhchem}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%    Pakiety do bibliografii i importu grafiki           %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage[sectionbib]{chapterbib}
+\makeatletter
+\renewcommand{\@memb@bsec}{\section*{\bibname}\prebibhook}
+\makeatother
+
+\usepackage{makeidx} \makeindex 
+\ifpdf
+ \usepackage[pdftex,bookmarks,breaklinks,unicode]{hyperref}
+ \usepackage[pdftex]{graphicx}
+ \DeclareGraphicsExtensions{.pdf,.jpg,.mps,.png}
+ \pdfcompresslevel=9
+\else
+ \usepackage{graphicx}
+ \DeclareGraphicsExtensions{.eps,.ps,.jpg,.mps,.png}
+\fi
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%    Znaczniki ciêcia                                    %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\makeatletter
+\AddToShipoutPicture{%
+  \setlength{\unitlength}{1mm}
+%% 162 x 234
+  \put(18,31.5){\line(-1,0){10}}%29.5
+  \put(24,26.5){\line(0,-1){10}}%21
+  \put(192,31.5){\line(1,0){10}}%29.5
+  \put(186,26.5){\line(0,-1){10}}%189
+  \put(18,265.5){\line(-1,0){10}}%267.5
+  \put(24,270.5){\line(0,1){10}}%21
+  \put(192,265.5){\line(1,0){10}}%267.5
+  \put(186,270.5){\line(0,1){10}}%189
+%% 168 x 238
+ \put(18,29.5){\line(-1,0){10}}%
+  \put(21,26.5){\line(0,-1){10}}%
+  \put(192,29.5){\line(1,0){10}}%
+  \put(189,26.5){\line(0,-1){10}}%
+  \put(18,267.5){\line(-1,0){10}}%
+  \put(21,270.5){\line(0,1){10}}%
+  \put(192,267.5){\line(1,0){10}}%
+  \put(189,270.5){\line(0,1){10}}%
+}
+\makeatother
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%    Ustawienia strony + definicje pomocnicze            %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setlength{\headsep}{9pt} 
+%\setlength{\headheight}{0pt}
+\setlength{\hoffset}{0mm} %%a4
+\setlength{\voffset}{0mm} %-14mm %%a4
+\setlength{\footskip}{23pt} % 23pt ~= 8mm
+\setlength{\topmargin}{13mm}%{7.65mm} %28pt -2.5mm
+%\setlength{\oddsidemargin}{11.85mm}
+%\setlength{\evensidemargin}{11.85mm}
+%\setlength{\textwidth}{135.5mm}
+%\setlength{\textheight}{203.6mm}
+
+\setlength{\parindent}{15pt}
+\setlength{\parskip}{0pt} %{1ex plus 0.5ex minus 0.2ex}
+\newlength\mytemplengtha
+
+\setlength{\extrarowheight}{2pt}
+%\setlength{\topmargin}{8mm}%{7.65mm} %28pt -2.5mm
+\setlength{\oddsidemargin}{15mm}
+\setlength{\evensidemargin}{15mm}
+\setlength{\textwidth}{129mm}%135.5
+\setlength{\textheight}{201mm}%203.6
+%\setlength{\parindent}{16pt}%18
+
+
+\sloppy  % wyrównanie z dwóch stron
+\renewcommand{\topfraction}{1.0}
+\renewcommand{\bottomfraction}{1.0}
+\renewcommand{\textfraction}{0.0}
+
+\widowpenalty=10000 % ostatni wiersz akapitu nie zostanie przeniesiony na nast?pn? stron? 
+\clubpenalty=10000 % pierwszy wiersz akapitu nie b?dzie ko?czy? strony (nie u?ywam tego ustawienia)
+%\tolerance = 500 \pretolerance = 900 %% sk?ad z wi?ksz? `tolerancj?' (mo?na te warto?ci zwi?kszy? bardziej)
+%\hbadness= 1450 %% zmniejsza licz? wy?wietlanych ostrze?e? (mo?na zwi?kszy?, ale bez przesady)
+%\hfuzz = 1.5pt %% tekst mo?e stercze? ma marginesie na 1,5pt (ok. 0,5mm)
+
+\setlength\floatsep{6pt plus 2pt minus 2pt} 
+\setlength\intextsep{12pt plus 2pt minus 2pt} 
+\setlength\textfloatsep{12pt plus 2pt minus 2pt} 
+%\captionnamefont{\small\bfseries}
+%\captiontitlefont{\small}
+\setbeforesecskip{10pt plus 0.5ex}%{-3.5ex \@plus -1ex \@minus -.2ex}
+\setaftersecskip{10pt plus 0.5ex}%\onelineskip}
+\setbeforesubsecskip{8pt plus 0.5ex}%{-3.5ex \@plus -1ex \@minus -.2ex}
+\setaftersubsecskip{8pt plus 0.5ex}%\onelineskip}
+
+%\setlength{\floatsep}{12pt}
+%\setlength{\textfloatsep}{12pt}
+%\setlength{\intextsep}{12pt}
+%\setlength{\arrayrulewidth}{0.5pt}
+\usepackage{color}
+\definecolor{lightgray}{rgb}{.9,.9,.9}
+\definecolor{darkgray}{rgb}{.4,.4,.4}
+\definecolor{purple}{rgb}{0.65, 0.12, 0.82}
+%\definecolor{nicered}{rgb}{.647,.129,.149}
+\definecolor{nicered}{rgb}{.0,.0,.0}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%    Zmienione otoczenia                                 %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\makeatletter
+\renewenvironment{itemize}{
+  \begin{list}{  
+  \csname labelitem\romannumeral\the\@listdepth\endcsname}{
+  \setlength{\leftmargin}{1em}
+	\setlength{\topsep}{6pt}%
+	\setlength{\partopsep}{0pt}%
+	\setlength{\parskip}{0pt}%
+	\setlength{\parsep}{0pt}%
+	\setlength{\itemsep}{0pt}}
+}{
+  \end{list}
+}
+\renewenvironment{quote}{
+  \begin{list}{}{}
+	 \item[]}
+	 {\unskip\end{list}}
+\makeatother
+
+\setlength{\leftmargini}{1.5em}
+\usepackage{bibspacing}
+\setlength{\bibspacing}{\baselineskip}
+
+\makeatletter
+\newskip\@hlskip
+%\@hlskip=.5\baselineskip \@plus 1mm \@minus .5mm
+\@hlskip=6pt
+
+\newdimen\verbatimleftmargin
+  \verbatimleftmargin\z@
+\newdimen\verbatimbaselineskip
+  \verbatimbaselineskip\baselineskip
+\def\verbatimsize{\normalsize}
+
+\def\@verbatim{%
+ \topsep\@hlskip
+ \partopsep\z@\parsep\z@\itemsep\z@
+ \trivlist \item\relax
+  \if@minipage\else
+   \vskip\baselineskip
+   \vskip-\verbatimbaselineskip
+%  \vskip\parskip
+  \fi
+  \leftskip\@totalleftmargin
+  \if@minipage\else
+   \advance \leftskip by \verbatimleftmargin
+  \fi
+  \rightskip\z@skip
+  \parindent\z@\parfillskip\@flushglue\parskip\z@skip
+  \@@par
+  \@tempswafalse
+  \def\par{%
+    \if@tempswa
+      \leavevmode \null \@@par\penalty\interlinepenalty
+    \else
+      \@tempswatrue
+      \ifhmode\@@par\penalty\interlinepenalty\fi
+    \fi}%
+  \let\do\@makeother \dospecials
+  \obeylines 
+   \verbatimsize \baselineskip\verbatimbaselineskip
+   \verbatim@font \@noligs
+  \everypar \expandafter{\the\everypar \unpenalty}%
+}
+\makeatother
+
+
+\newcommand{\autorzy}{}
+
+\makeatletter
+\newlength\dlf@normtxtw
+\setlength\dlf@normtxtw{\textwidth}
+\def\myhelvetfont{\def\sfdefault{mdput}}
+\newsavebox{\feline@chapter}
+\newcommand\feline@chapter@marker[1][4cm]{%
+\sbox\feline@chapter{%
+\resizebox{!}{#1}{\fboxsep=1pt%
+\colorbox{nicered}{\color{white}\bfseries\sffamily\thechapter}%
+}}%
+\rotatebox{90}{%
+\resizebox{%
+\heightof{\usebox{\feline@chapter}}+\depthof{\usebox{\feline@chapter}}}%
+{!}{\scshape\so\@chapapp}}\quad%
+\raisebox{\depthof{\usebox{\feline@chapter}}}{\usebox{\feline@chapter}}%
+}
+\newcommand\feline@chm[1][4cm]{%
+\sbox\feline@chapter{\feline@chapter@marker[#1]}%
+\makebox[0pt][l]{% aka \rlap
+\makebox[1cm][r]{\usebox\feline@chapter}%
+}}
+\makechapterstyle{daleif1}{
+\renewcommand\chapnamefont{\normalfont\Large\scshape\raggedleft\so}
+\renewcommand\chaptitlefont{\normalfont\huge\bfseries\scshape\color{nicered}}
+\renewcommand\chapternamenum{}
+\renewcommand\printchaptername{}
+\renewcommand\printchapternum{\vspace{-3cm}\null\hfill\feline@chm[2.5cm]\par}
+\renewcommand\afterchapternum{\par\vskip\midchapskip}
+\renewcommand\printchaptertitle[1]{\chaptitlefont\raggedleft ##1\\  \makebox[\textwidth - (1cm + \widthof{\Huge \thechapter.})][r]{\Large \itshape \autorzy}\par}
+}
+
+\addtopsmarks{headings}{%
+\nouppercaseheads % added at the beginning
+}{%
+\createmark{chapter} {left}{shownumber}{}{. \space}
+\createmark{section}{right}{shownumber}{}{. \space}
+}%use the new settings
+\pagestyle{headings}
+
+\setcounter{secnumdepth}{2}
+\setcounter{tocdepth}{2}
+\setsecnumdepth{subsection} % activating subsubsec numbering in doc
+
+
+%definicja nag³ówków
+\copypagestyle{outer}{headings}
+\makeoddhead{outer}{}{}{\small\color{nicered}\slshape\rightmark}
+\makeevenhead{outer}{\small\color{nicered}\slshape\leftmark}{}{}
+\makeoddfoot{outer}{}{}{\thepage}
+\makeevenfoot{outer}{\thepage}{}{}
+% fix plain
+%\copypagestyle{plain}{outer} % overwrite plain with outer
+\makeoddhead{plain}{}{}{} % remove right header
+\makeevenhead{plain}{}{}{} % remove left header
+\makeevenfoot{plain}{}{}{}
+\makeoddfoot{plain}{}{}{}
+
+\makepagestyle{intro}
+\makeoddhead{intro}{}{}{\small\color{nicered}\slshape S³owo wstêpne}
+\makeevenhead{intro}{\small\color{nicered}\slshape S³owo wstêpne}{}{}
+\makeoddfoot{intro}{}{}{\thepage}
+\makeevenfoot{intro}{\thepage}{}{}
+
+%\renewcommand{\chaptermark}[1]{\markboth{\ifnum \c@secnumdepth >\z@ \thechapter \ \fi #1}{}} 
+%\renewcommand{\chaptermark}[1]{\markboth{\thechapter \ #1}{\thesection \ #1}} 
+%\renewcommand{\sectionmark}[1]{\markright{\thesection \ #1}{}} 
+%\renewcommand{\chaptermark}[1]{\markboth{\thechapter \MakeUppercase{#1}}{}}
+
+%kropki po numerach sekcji
+\makeatletter
+\def\@seccntformat#1{\csname the#1\endcsname.\quad}
+\def\numberline#1{\hb@xt@\@tempdima{#1\if&#1&\else.\fi\hfil}}
+\makeatother
+
+% z jakiego? powodu czcionki s? mniejsze o jeden punkt ni? wynika?oby to z poni?szych ustawie?
+\renewcommand{\bfdefault}{b}
+\renewcommand{\normalsize}{\fontsize{11pt}{12.5pt}\selectfont}
+\newcommand{\smallp}{\fontsize{9.5pt}{11.5pt}\selectfont}
+\makeatother
+
+%Podpisy pod rysunkami i tabelami
+%\AtBeginDocument{% 
+        \addto\captionspolish{% 
+        \renewcommand{\tablename}{Tab.}% 
+}%} 
+%\AtBeginDocument{% 
+%        \addto\captionspolish{% 
+%        \renewcommand{\chaptername}{Rozdzia³}% 
+%}} 
+
+%\AtBeginDocument{% 
+        \addto\captionspolish{% 
+        \renewcommand{\figurename}{Rys.}% 
+}%}
+
+%%% Strona tytu?owa
+%%% Strona tytu³owa
+\newcommand*{\titleTH}{\begingroup% T&H Typography
+\raggedleft
+\vspace*{5cm}
+{\textcolor{nicered}{\fontsize{28}{28}\fontfamily{put}\bfseries\selectfont 	KOMPUTEROWE}}\\[\baselineskip]
+{\textcolor{nicered}{\fontsize{28}{28}\fontfamily{put}\bfseries\selectfont 	PRZETWARZANIE}}\\[\baselineskip]
+{\textcolor{nicered}{\fontsize{28}{28}\fontfamily{put}\bfseries\selectfont 	WIEDZY}}\\[2cm]
+{\fontsize{18}{18}\fontfamily{put}\bfseries\selectfont Kolekcja prac 2012/2013}\\[0.5\baselineskip]
+{\fontsize{18}{18}\fontfamily{put}\bfseries\selectfont pod redakcj¹ Tomasza Kubika}\\
+\vfill
+%{\Large Politechnika Wroc³awska, 2011}\par
+\vspace*{3\baselineskip}
+\endgroup}
+
+
+%\counterwithout{figure}{chapter}
+%\counterwithout{table}{chapter}
+
+
+\begin{document}
+\pagestyle{outer}
+\openany
+\chapterstyle{daleif1}
+\thispagestyle{empty} \pdfbookmark[0]{Tytu³}{Tytul.1}\titleTH \clearpage
+
+\mbox{}\pdfbookmark[0]{Spis treœci}{spisTresci.1}
+\tableofcontents*
+%\thispagestyle{empty} 
+\cleardoublepage
+
+\pagestyle{outer}
+\include{chap01}
+
+\end{document}
