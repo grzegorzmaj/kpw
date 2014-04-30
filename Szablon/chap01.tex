@@ -2,18 +2,187 @@
 \renewcommand{\autorzy}{M.~Nowak, G.~Maj}
 \chapter[Audyt w systemach informatycznych][Audyt w systemach informatycznych]{Audyt w systemach informatycznych}
 
- Jednym z podstawowych problemów profesjonalnego zarz¹dzania firm¹ w bran¿y informatycznej jest zarz¹dzanie jakoœci¹. Jakoœæ mo¿na definiowaæ i mierzyæ na wielu poziomach. Bardzo du¿o uwagi poœwiêcane jest jakoœci produktów, choæ równie wa¿nym elementem jest ocena jakoœci pracy pracowników oraz ich efektywnoœci. Audyt w systemach informatycznych powinien zawieraæ równie¿ elementy oceny jakoœci pracy i s³u¿yæ usprawnieniu dzia³ania organizacji.
+  Jednym z podstawowych problemów profesjonalnego zarz¹dzania firm¹ w bran¿y informatycznej jest zarz¹dzanie jakoœci¹. Jakoœæ mo¿na definiowaæ i mierzyæ na wielu poziomach. Bardzo du¿o uwagi poœwiêcane jest jakoœci produktów, choæ równie wa¿nym elementem jest ocena jakoœci pracy pracowników oraz ich efektywnoœci. Audyt w systemach informatycznych powinien zawieraæ równie¿ elementy oceny jakoœci pracy i s³u¿yæ usprawnieniu dzia³ania organizacji.
 
 W rozwa¿aniach na temat oceny jakoœci pracy i wydajnoœci pracowników skupiono siê na firmach informatycznych, których przedmiotem dzia³alnoœci jest wytwarzanie oprogramowania. Kluczowym pracownikiem bior¹cym udzia³ w tworzeniu koñcowego produktu, czyli programu jest programista. Ocena pracy programisty jest zadaniem z³o¿onym i wymaga znajomoœci wielu aspektów procesu wytwarzania oprogramowania. W dzisiejszych czasach zarz¹dzanie jakoœci¹ oprogramowania jest prawdziwym wyzwaniem dla du¿ych firm o zasiêgu globalnym zatrudniaj¹cych tysi¹ce programistów z ca³ego œwiata.
 
 Podstawowym pytaniem, które postawiono w tym rozdziale jest: jak efektywnie mierzyæ jakoœæ i efektywnoœæ pracy programisty? W niniejszym artykule autorzy postaraj¹ siê przybli¿yæ problem, przedstawiæ dostêpne na rynku rozwi¹zania oraz opisaæ prosty system kontroli efektywnoœci pracy.
 
-\section[Sposoby pomiaru jakoœci pracy programisty][Sposoby pomiaru jakoœci pracy programisty]{Sposoby pomiaru jakoœci pracy programisty}
-%mo¿na te¿ pisaæ bez opcjonalnych atrybutów:
-%\section{Tytu³ pierwszego podrozdzia³u}
-\label{sec:pierwsza}
 
-Problem oceny jakoœci pracy programisty nie jest problemem ³atwym. Dosyæ prosto mo¿na zaproponowaæ podstawowe kryteria jednak nie zawsze oddaj¹ one faktyczny nak³ad pracy. 
+\section{Dostêpne systemy pomiaru pracy}
+\label{sec:dostepneSystemy}
+
+\subsection{Systemy kontroli wersji}
+Przyk³adami systemów kontroli wersji s¹ najbardziej popularne darmowe systemy takie jak:
+\begin{itemize}
+	\item Git,
+	\item Svn,
+	\item Mercurial.
+\end{itemize}
+
+Systemy kontroli wersji stworzone s¹ do pomocy przy rozwoju oprogramowania, ich g³ównym zadaniem jest ³¹czenie pracy wielu pracowników jednego projektu, jednak poprzez tworzenie historii zmian w projekcie daje mo¿liwoœæ kontroli i oceny pracy pracowników.
+Daj¹ one mo¿liwoœæ œledzenia postêpu prac poczynionych przez poszczególnych pracowników. Podstawowe informacje, które mo¿na uzyskaæ to:
+\begin{itemize}
+	\item jaki u¿ytkownik i kiedy wprowadza³ zmiany,
+	\item mo¿liwoœæ sprawdzenia jakie zmiany zosta³y wprowadzone w danym commicie:
+	\begin{itemize}
+		\item dok³adne ró¿nice miêdzy zmienionymi plikami,
+		\item skrócone statystyki(iloœæ zmian bez poszczególnych ró¿nic),
+		\item sumy kontrolne poszczególnych zmian,
+		\item wyœwietlanie tylko informacji przez nas okreœlonych,
+	\end{itemize}
+	
+	\item mo¿liwoœæ dostosowania informacji przez nas œledzonej: 
+	\begin{itemize}
+		\item kontrola jednego pracownika,
+		\item kontrola danego okresu zmian,
+		\item kontrola historii tworzenia i ³¹czenia ga³êzi.
+	\end{itemize}
+
+\end{itemize}
+
+
+	\subsubsection{Git}
+	Git jest rozproszonym systemem kontroli wersji. Jest to wolne oprogramowanie udostêpnione na licencji GNU GPL2. Git powsta³ jako alternatywa dla zamkniêtego systemu BitKeeper w kwietniu 2005 roku do rowijania projektu Linux.
+	
+	\subsubsection{Svn}
+	Subversion jest wolnym syetmem kontroli wersji udostêpnionym na licencji Apache. Zosta³ stworzony do zast¹pienia systemu CVS.
+	
+	\subsubsection{Mercurial}
+	Marcurial podobnie jak Git jest rozproszonym systemem kontroli wersji. Zosta³ napisany w tym samym czasie jak Git, te¿ w celu pomocy do rozwijania projektu Linux. Jest wykorzystywany w wielu projektach otwartoŸród³owych.
+
+\subsection{Systemy zarz¹dzania projektem}
+
+\begin{itemize}
+	\item Redmine,
+	\item Jira,
+	\item GitHub.
+\end{itemize}
+
+\subsection{Systemy do statycznej analizy kodu}
+
+\begin{itemize}
+	\item Klocwork (C++),
+	\item Pylint (Python),
+	\item CodeSonar (Java).
+\end{itemize}
+
+
+\section[Sposoby pomiaru jakoœci pracy programisty][Sposoby pomiaru jakoœci pracy programisty]
+{Sposoby pomiaru jakoœci pracy programisty}
+\label{sec:sposobyPomiaruJakosci}
+Na ocenê pracownika programisty mo¿na patrzeæ z ró¿nych perspektyw. Z jednej strony, efektem jego
+pracy jest kod Ÿród³owy, wiêc podstawowym sk³adnikiem oceny powinna byæ jego jakoœæ. Z drugiej
+strony jednak, w ka¿dym projekcie obecne s¹ pewne ograniczenia czasowe, wiêc szybkoœæ pracy
+pracownika jest równie¿ wa¿nym aspektem oceny. W ogólnoœci mo¿na powiedzieæ, ¿e jakoœæ pracy
+programisty mo¿na sprowadziæ do dwóch sk³adników:
+\begin{itemize}
+	\item oceny jakoœci kodu,
+	\item oceny organizacji pracy.
+\end{itemize}
+
+Normy dotycz¹ce zarz¹dzania jakoœci¹ (np. ISO 9000:2008, ISO 15504-4:2005) definiuj¹ tzw. kluczowe 
+wskaŸniki efektywnoœci (ang. KPI - key performance indicator). Wa¿n¹ cech¹ tych wskaŸników jest
+to, ¿e opisuj¹ one mierzalne procesy w postaci liczbowej. Daje to mened¿erowi obiektywny obraz
+efektywnoœci danego procesu w przedsiêbiorstwie i pozwala na cykliczn¹ kontrolê jakoœci. Poni¿ej
+przedstawiono kilka przyk³adowych wskaŸników, które spe³niaj¹ warunek mierzalnoœci, wiêc kwalifikuj¹
+siê do grupy KPI. 
+
+\subsection[Ocena jako?ci wygenerowanego kodu][Ocena jako?ci wygenerowanego kodu]{Ocena jako?ci 
+wygenerowanego kodu}
+\label{subsec:ocenaJakosciKodu}
+Jakoœæ kodu jest bardzo szerokim zagadnieniem, które po wielu dekadach intensywnego rozwoju bran¿y
+IT nie zosta³o jeszcze dostatecznie zbadane. Wynika to st¹d, ¿e na przestrzeni lat zmienia³y siê
+trendy w tworzeniu oprogramowania -- programiœci stosowali ró¿ne paradygmaty programowania (w 
+kolejnoœci chronologicznej: programowanie obiektowe, programowanie strukturalne, programowanie 
+funkcjonalne). Dziœ dominuj¹cym paradygmatem jest programowanie obiektowe, lecz wydaje siê, ¿e 
+prawdziwa jest teza, ¿e ka¿da z wymienionych filozofii tworzenia oprogramowania jest u¿yteczna dla
+pewnych zastosowañ.
+
+St¹d obiektywny pomiar jakoœciowy kody jest trudny. Niektóre elementy jêzyka mog¹ byæ uznawane za
+wartoœciowe w jednym podejœciu, a drugim absolutnie niedopuszczalne. Istniej¹ jednak pewne
+fundamentalne cechy kodu, które s¹ po¿¹dane zawsze, np. zwiêz³oœæ kodu.
+
+Wartoœci s³u¿¹ce do pomiaru pewnej w³asnoœci oprogramowania lub jego specyfikacji nazywane s¹
+metrykami oprogramowania. Aby metryka by³a u¿yteczna powinna byæ:
+\begin{itemize}
+	\item prosta i mo¿liwa do obliczenia przez komputer,
+	\item przekonuj¹ca,
+	\item konsekwentna i obiektywna,
+	\item spójna pod wzglêdem u¿ytych jednostek,
+	\item niezale¿na od jêzyka oprogramowania,
+	\item daj¹ca przydatne informacje\cite{asd}.
+\end{itemize}
+
+Metryki mo¿na podzieliæ na statyczne i dynamiczne. Metryki statyczne ³¹cz¹ siê œciœle z analiz¹ 
+statyczn¹ kodu, dziedzin¹ in¿ynierii oprogramowania zajmuj¹c¹ siê badaniem struktury kodu 
+Ÿród³owego. Metryki te najbardziej przydatne s¹ dla samych programistów i innych osób bezpoœrednio
+zaanga¿owanych w proces powstawania oprogramowania. Pozwalaj¹ na bie¿¹ce œledzenie jakoœci kodu i
+zwrócenie uwagi na miejsca, które wymagaj¹ uproszczenia b¹dŸ szczególnie uwa¿nego testowania.
+Niemniej jednak, programista, który dostarcza kod o dobrych statycznych metrykach mo¿e byæ uznawany
+za dobrego pracownika.
+
+Metryki dynamiczne to wskaŸniki abstrahuj¹ce od kodu Ÿród³owego. Badaj¹ one zachowanie programu po
+jego uruchomieniu. S¹ one mocno zwi¹zane z wymaganiami klienta, st¹d dla samego przedsiêbiorcy,
+s¹ to liczby przydatne bardziej do analizy jakoœci produktu ni¿ pracy jego pracowników.  
+
+\subsubsection[Linie kodu (LOC)][Linie kodu (LOC)]{Linie kodu (LOC)}
+\label{subsubsec:linieKodu}
+Najprostrz¹ metryk¹ rozmiaru oprogramowania jest liczba linii kodu Ÿród³owego. Mimo jej prostoty,
+wymaga ona pewnego rozró¿nienia, bowiem programy pisane w jêzykach wysokiego poziomu maj¹ znacz¹co
+mniej linii kody ni¿ programy pisane np. w assemblerze. Do tej metryki z regu³y nie s¹ wliczane
+równie¿ linie zawieraj¹ce tylko komentarze.
+
+Wa¿nym aspektem jest tutaj równie¿ styl pisania kodu. Poni¿sze dwa przyk³ady obrazuj¹ dwa ró¿ne
+style programowania w jêzyku C++ obrazuj¹ce ten niuans:
+
+\begin{lstlisting}
+// przyklad 1
+void bubblesort(std::vector<int>& A)
+{
+	int temp = 0;
+
+	for (int i = 0; i < A.length()-1; i++)
+	{
+		for (int j = 0; j < A.length()- 1 - i; j++)
+		{
+			if (A[j] > A[j+1])
+			{
+				temp = A[j+1];
+				A[j+1] = A[j];
+				A[j] = temp;
+			}
+		}
+	}
+}
+\end{lstlisting}
+
+\begin{lstlisting}
+// przyklad 2
+void bubblesort(std::vector<int>& A) {
+	for (int i = 0; i < A.length()-1; i++)
+		for (int j = 0; j < A.length()- 1 - i; j++)
+			if (A[j] > A[j+1])
+				std::swap(A[j], A[j+1]);
+}
+\end{lstlisting}
+
+Oba przyk³ady s¹ identyczn¹ implementacj¹ popularnego slgorytmu sortowania b¹belkowego. W pierwszym
+przyk³adzie stosowane s¹ przeniesienia do nastêpnej linii przy otwieraniu nowych bloków kodu (klamr
+\{\}). Oprócz tego, ka¿de wyra¿enie warunkowe i pêtle s¹ akcentowane nowym otwarciem i zamkniêciem
+klamry, choæ sk³adnia jêzyka C++ tego nie wymaga. Dodatkowo, w drugim przyk³adzie, aby bardziej
+zwiêkszyæ zwiêz³oœæ (i czytelnoœæ) kodu, do operacji zamiany wartoœci dwóch elementów wektra,
+zastosowano funkcjê z biblioteki standardowej, która ma dok³adnie takie samo dzia³anie jak kod
+z przyk³adu pierwszego.
+
+\subsubsection[Linie kodu na plik Ÿród³owy][Linie kodu na plik Ÿród³owy]
+{Linie kodu na plik Ÿród³owy}
+\label{subsubsec:linieKoduNaPlik}
+
+\subsection{Ocena efektywnoœci pracy}
+\label{subsec:ocenaEfektywnosci}
+Problem oceny efektywnoœci pracy programisty nie jest problemem ³atwym. Dosyæ prosto mo¿na
+zaproponowaæ podstawowe kryteria jednak nie zawsze oddaj¹ one faktyczny nak³ad pracy. 
 
 \begin{itemize}
 	\item czas pracy pracownika,
@@ -31,49 +200,11 @@ Problem oceny jakoœci pracy programisty nie jest problemem ³atwym. Dosyæ prosto 
 	\end{itemize}
 \end{itemize}
 
-\section{Ocena efektywnoœci pracy}
-\label{sec:druga}
-
-
-\section[Ocena jakoœci wygenerowanego kodu][Ocena jakoœci wygenerowanego kodu]{Ocena jakoœci wygenerowanego kodu}
-\label{sec:trzecia}
-
-
-\section{Dostêpne systemy pomiaru pracy}
-\label{sec:czwarta}
-
-\subsection{Systemy kontroli wersji}
-Przyk³adami systemów kontroli wersji s¹ najbardziej popularne darmowe systemy takie jak:
-\begin{itemize}
-	\item Git,
-	\item Svn,
-	\item Mercurial.
-\end{itemize}
-
-Daj¹ one mo¿liwoœæ œledzenia postêpu prac poczynionych przez poszczególnych pracowników. 
-
-\subsection{Systemy zarz¹dzania projektem}
-
-
-
-\begin{itemize}
-	\item Redmine,
-	\item Jira,
-	\item GitHub.
-\end{itemize}
-
-\subsection{Systemy do statycznej analizy kodu}
-
-\begin{itemize}
-	\item Klocwork (C++),
-	\item Pylint (Python),
-	\item CodeSonar (Java).
-\end{itemize}
-
 
 
 \section{Proponowane rozwi¹zanie}
-\label{sec:piata}
+\label{sec:czwarta}
+
 
 
 
