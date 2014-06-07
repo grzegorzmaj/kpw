@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+<fullyQualifiedTypeName name="org.eclipse.jface.viewers.TableViewer"/>
+<fullyQualifiedTypeName name="org.eclipse.core.runtime.IPath"/>
+<fullyQualifiedTypeName name="org.eclipse.core.runtime.Path"/>
+<fullyQualifiedTypeName name="java.util.ArrayList"/>
+<fullyQualifiedTypeName name="org.eclipse.core.resources.IResourceDeltaVisitor"/>
+<fullyQualifiedTypeName name="org.eclipse.core.runtime.CoreException"/>
+<fullyQualifiedTypeName name="org.eclipse.swt.widgets.Display"/>
+<fullyQualifiedTypeName name="org.eclipse.core.resources.IResourceChangeListener"/>
+<fullyQualifiedTypeName name="org.eclipse.core.resources.IResourceChangeEvent"/>
+<fullyQualifiedTypeName name="org.eclipse.core.resources.IResourceDelta"/>
+<fullyQualifiedTypeName name="org.eclipse.swt.graphics.Path"/>
+<fullyQualifiedTypeName name="org.eclipse.core.resources.IResource"/>
+<fullyQualifiedTypeName name="org.eclipse.core.resources.IWorkspace"/>
+<fullyQualifiedTypeName name="org.eclipse.core.resources.ResourcesPlugin"/>
+</qualifiedTypeNameHistroy>
