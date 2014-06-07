@@ -1,8 +1,8 @@
 #version=1
 com.ibm.icu,50.1.1.v201304230130,file:/usr/local/eclipse/plugins/com.ibm.icu_50.1.1.v201304230130.jar,4,false
 com.jcraft.jsch,0.1.50.v201310081430,file:/usr/local/eclipse/plugins/com.jcraft.jsch_0.1.50.v201310081430.jar,4,false
+com.nowakmaj.actions,1.0.0.qualifier,file:/home/grzegorz/mgr_3-sem/kpw/kpw/app/com.nowakmaj.actions/,4,false
 com.nowakmaj.loc,1.0.0.qualifier,file:/home/grzegorz/mgr_3-sem/kpw/kpw/app/com.nowakmaj.loc/,4,false
-com.nowakmaj.metrics,1.0.0,file:/home/grzegorz/mgr_3-sem/kpw/kpw/app/com.nowakmaj.metrics/,4,false
 com.sun.el,2.2.0.v201303151357,file:/usr/local/eclipse/plugins/com.sun.el_2.2.0.v201303151357.jar,4,false
 javaewah,0.5.6.v201307211000,file:/usr/local/eclipse/plugins/javaewah_0.5.6.v201307211000.jar,4,false
 javax.annotation,1.1.0.v201209060031,file:/usr/local/eclipse/plugins/javax.annotation_1.1.0.v201209060031.jar,4,false

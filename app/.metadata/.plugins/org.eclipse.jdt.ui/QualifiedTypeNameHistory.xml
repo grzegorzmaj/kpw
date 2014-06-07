@@ -14,4 +14,14 @@
 <fullyQualifiedTypeName name="org.eclipse.core.resources.IResource"/>
 <fullyQualifiedTypeName name="org.eclipse.core.resources.IWorkspace"/>
 <fullyQualifiedTypeName name="org.eclipse.core.resources.ResourcesPlugin"/>
+<fullyQualifiedTypeName name="org.eclipse.swt.widgets.Tree"/>
+<fullyQualifiedTypeName name="org.eclipse.swt.widgets.TreeItem"/>
+<fullyQualifiedTypeName name="org.eclipse.swt.custom.CTabFolder"/>
+<fullyQualifiedTypeName name="org.eclipse.swt.custom.CTabItem"/>
+<fullyQualifiedTypeName name="java.util.Map"/>
+<fullyQualifiedTypeName name="java.util.ResourceBundle.Control"/>
+<fullyQualifiedTypeName name="org.eclipse.swt.widgets.Control"/>
+<fullyQualifiedTypeName name="org.eclipse.swt.widgets.TabFolder"/>
+<fullyQualifiedTypeName name="org.eclipse.swt.widgets.TabItem"/>
+<fullyQualifiedTypeName name="org.eclipse.swt.layout.FillLayout"/>
 </qualifiedTypeNameHistroy>

@@ -4,8 +4,8 @@
 	<item value="false" key="uiPlugin"/>
 	<item value="false" key="rcpPlugin"/>
 	<item value="false" key="apiAnalysis"/>
-	<item value="false" key="osgiProject"/>
 	<item value="3.5 or greater" key="targetName"/>
+	<item value="false" key="osgiProject"/>
 	<list key="providers">
 		<item value="NOWAKMAJ"/>
 	</list>
@@ -15,12 +15,14 @@
 		<section name="DialogBoundsSettings">
 			<item value="600" key="DIALOG_WIDTH"/>
 			<item value="69" key="DIALOG_Y_ORIGIN"/>
-			<item value="341" key="DIALOG_X_ORIGIN"/>
 			<item value="500" key="DIALOG_HEIGHT"/>
+			<item value="341" key="DIALOG_X_ORIGIN"/>
 			<item value="1|Ubuntu|11.0|0|GTK|1|" key="DIALOG_FONT_NAME"/>
 		</section>
 	</section>
 	<section name="quick_assist_proposal_size">
+	</section>
+	<section name="pluginsView">
 	</section>
 	<section name="PDEFormActionManager">
 	</section>
