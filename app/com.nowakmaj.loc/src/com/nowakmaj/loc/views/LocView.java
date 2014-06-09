@@ -5,7 +5,6 @@ package com.nowakmaj.loc.views;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import java.io.File;
 import java.util.HashMap;
 
@@ -22,6 +21,7 @@ import org.eclipse.swt.widgets.Tree;
 import org.eclipse.swt.widgets.TreeColumn;
 import org.eclipse.swt.widgets.TreeItem;
 import org.eclipse.ui.part.*;
+import org.eclipse.core.internal.resources.projectvariables.ParentVariableResolver;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IResourceChangeEvent;
 import org.eclipse.core.resources.IResourceChangeListener;
@@ -58,6 +58,7 @@ public class LocView extends ViewPart {
 
 	private IResourceChangeListener listener;
 	private TabFolder tabs;
+	Composite _parent;
 
 	ArrayList<String> projectNames;
 	ArrayList<String> fileNames;
@@ -124,7 +125,8 @@ public class LocView extends ViewPart {
 	 * This is a callback that will allow us
 	 * to create the viewer and initialize it.
 	 */
-	public void createPartControl(Composite parent) {
+	public void createTabs(Composite parent)
+	{
 		tabs = new TabFolder(parent, SWT.BOTTOM);
 
 
@@ -191,6 +193,12 @@ public class LocView extends ViewPart {
 
 		}
 		tabs.setSelection(0);
+	}
+	
+	public void createPartControl(Composite parent) {
+		_parent = parent;
+		
+		createTabs(parent);
 
 
 		hookSave();
@@ -202,15 +210,17 @@ public class LocView extends ViewPart {
 	{
 		ArrayList<String> dates = new ArrayList<String>();;
 		HashMap<String, String> changes = new HashMap<String, String>();
+		HashMap<String, String> changesLocpf = new HashMap<String, String>();
 		for (DatabaseInterface data: dbInterface)
 		{
 			if(data.Name().compareTo(selectedFile.getProject().toString())==0)
 			{
 				dates = data.getLastChangesDates(100);
 				changes = data.getLastChangesOfLOCForFile(selectedFile.getPath(), 100);
+				changesLocpf = data.getLastChangesOfLOCPF(100);
 			}
 		}
-		mydialog dialog = new mydialog(tabs.getShell(), dates, changes);
+		mydialog dialog = new mydialog(tabs.getShell(), dates, changes, changesLocpf);
 		dialog.open();
 	}
 
@@ -223,13 +233,13 @@ public class LocView extends ViewPart {
 				{
 					data.updateDb();
 				}
-
-				System.out.print("Something changed in:");
+				tabs.dispose();
+				createTabs(_parent);
+		        _parent.layout(true);
 			}
 
 		};
 
-		//		listener = new MyResourceChangeListener();
 		workspace.addResourceChangeListener(listener, IResourceChangeEvent.POST_CHANGE);
 	}
 
