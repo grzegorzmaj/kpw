@@ -149,23 +149,23 @@ public class LocView extends ViewPart {
 			TreeColumn column2 = new TreeColumn(addressTree, SWT.RIGHT);
 			column2.setAlignment(SWT.LEFT);
 			column2.setText("num of lines");
-			column2.setWidth(50);
+			column2.setWidth(100);
 			TreeColumn column3 = new TreeColumn(addressTree, SWT.RIGHT);
 			column3.setAlignment(SWT.LEFT);
 			column3.setText("num of lines");
-			column3.setWidth(50);
+			column3.setWidth(100);
 			TreeColumn column4 = new TreeColumn(addressTree, SWT.RIGHT);
 			column4.setAlignment(SWT.LEFT);
 			column4.setText("num of lines");
-			column4.setWidth(50);
+			column4.setWidth(100);
 			TreeColumn column5 = new TreeColumn(addressTree, SWT.RIGHT);
 			column5.setAlignment(SWT.LEFT);
 			column5.setText("num of lines");
-			column5.setWidth(50);
+			column5.setWidth(100);
 			TreeColumn column6 = new TreeColumn(addressTree, SWT.RIGHT);
 			column6.setAlignment(SWT.LEFT);
 			column6.setText("num of lines");
-			column6.setWidth(50);
+			column6.setWidth(100);
 
 			m_treeViewer.setContentProvider(new AddressContentProvider());
 			m_treeViewer.setLabelProvider(new TableLabelProvider());
@@ -186,7 +186,7 @@ public class LocView extends ViewPart {
 
 					Object selectedElement = selection.getFirstElement();
 					File selectedFile = (File) selectedElement;
-					
+
 					showMessage(selectedFile);
 				}
 			});
@@ -194,10 +194,10 @@ public class LocView extends ViewPart {
 		}
 		tabs.setSelection(0);
 	}
-	
+
 	public void createPartControl(Composite parent) {
 		_parent = parent;
-		
+
 		createTabs(parent);
 
 
@@ -235,7 +235,7 @@ public class LocView extends ViewPart {
 				}
 				tabs.dispose();
 				createTabs(_parent);
-		        _parent.layout(true);
+				_parent.layout(true);
 			}
 
 		};
@@ -316,12 +316,12 @@ public class LocView extends ViewPart {
 			indx = i + 1;
 			fullPath = full;
 		}
-		
+
 		public String getPath()
 		{
 			return fullPath;
 		}
-		
+
 		public Project getProject()
 		{
 			return project;
@@ -353,19 +353,23 @@ public class LocView extends ViewPart {
 				return "x";
 			case 2: 
 				if(dates.size()>1)
-					return changes.get(dates.get(1));
+					if(changes.get(dates.get(1))!="-1")
+						return changes.get(dates.get(1));
 				return "x";
 			case 3: 
 				if(dates.size()>2)
-					return changes.get(dates.get(2));
+					if(changes.get(dates.get(2))!="-1")
+						return changes.get(dates.get(2));
 				return "x";
 			case 4: 
 				if(dates.size()>3)
-					return changes.get(dates.get(3));
+					if(changes.get(dates.get(3))!="-1")
+						return changes.get(dates.get(3));
 				return "x";
 			case 5: 
 				if(dates.size()>4)
-					return changes.get(dates.get(4));
+					if(changes.get(dates.get(4))!="-1")
+						return changes.get(dates.get(4));
 				return "x";
 			}
 			return null;

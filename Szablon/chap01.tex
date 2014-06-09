@@ -87,7 +87,21 @@ Daj¹ one mo¿liwoœæ œledzenia postêpu prac poczynionych przez poszczególnych prac
 \subsection{Systemy do statycznej analizy kodu}
 
 \begin{itemize}
-	\item
+	\item Klocwork,
+	
+	Klockwork jest zamkniêtym programem przeznaczonym do statycznej analizy kodu pozwalaj¹cym na detekcjê
+	b³êdów strukturalnych kodu i b³êdów przebiegu programu. Pmo¿liwia pracê z najpopularniejszymi jêzykami
+	C, C++, Java czy C#.
+		 
+	\item Pylint (Python),
+	Pylint is a source code bug and quality checker for the Python programming language. It follows the style recommended by PEP 8, the Python style guide.[2] It is similar to Pychecker but includes the following features:
+
+Checking the length of each line
+Checking if variable names are well-formed according to the project's coding standard
+Checking if declared interfaces are truly implemented[3]
+It is also equipped with the Pyreverse module that allows UML diagrams to be generated from Python code.
+	\item CodeSonar (Java).
+	 Defect detection (Buffer overruns, memory leaks, ...), concurrency and security checks, architecture visualization and software metrics for C, C++ and Java source code.
 \end{itemize}
 
 
@@ -228,6 +242,41 @@ zaproponowaæ podstawowe kryteria jednak nie zawsze oddaj¹ one faktyczny nak³ad p
 \section{Proponowane rozwi¹zanie}
 \label{sec:czwarta}
 
+W niniejszej pracy utworzono wtyczkê do popularnego œrodowiska programistycznego Eclipse. Wtyczka pozwala 
+na analizê rozk³adu kodu w projekcie. Przegl¹da wszystkie pliki Ÿród³owe w przestrzeni pracy, tworzy
+historiê zmiany plików i pozwala na przejrzyst¹ wizualizacjê zebranych danych.
+
+	\subsection{Eclipse IDE}
+	
+	
+	
+	\subsection{PDE}
+	
+	\subsection{Utworzona wtyczka}
+
+
+\begin{figure}
+	\centering
+	\includegraphics[width=\textwidth]{graphics/view.jpg}
+	\caption{Widok na podstawowy wygl¹d wtyczki.}
+	\label{fig:view}
+\end{figure}
+
+
+\begin{figure}
+	\centering
+	\includegraphics[width=\textwidth]{graphics/chartLOC.jpg}
+	\caption{Widok na okno wykresów LOC.}
+	\label{fig:LOC}
+\end{figure}
+
+
+\begin{figure}
+	\centering
+	\includegraphics[width=\textwidth]{graphics/chartLOCPF.jpg}
+	\caption{Widok na okno wykresów LOCPF.}
+	\label{fig:LOCPF}
+\end{figure}
 
 
 
