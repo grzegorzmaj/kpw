@@ -7,10 +7,12 @@ import java.util.HashMap;
 
 public class DatabaseInterface {
 
+	String projName;
 	DatabaseManager dbManager_;
 	DatabaseReader dbReader_;
 	WorkspaceScanner scanner_;
 	File projectDir_;
+	
 	
 	public static String retrieveTimeStamp()
 	{
@@ -19,12 +21,18 @@ public class DatabaseInterface {
 		return sdf.format(date);
 	}
 	
-	public DatabaseInterface(File dbFile, File projectDir)
+	public DatabaseInterface(File dbFile, File projectDir, String Proj)
 	{
+		projName = Proj;
 		projectDir_ = projectDir;
 		dbManager_ = new DatabaseManager(dbFile);
 		dbReader_ = new DatabaseReader(dbManager_.getDatabaseDocument());
 		scanner_ = new WorkspaceScanner();
+	}
+	
+	public String Name()
+	{
+		return projName;
 	}
 	
 	public void updateDb()

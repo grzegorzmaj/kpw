@@ -112,7 +112,7 @@ public class LocView extends ViewPart {
 			newDir += "/testDb.xml"; 
 			System.out.println(newDir);
 			databaseFile.add(new java.io.File(newDir));
-			dbInterface.add(new DatabaseInterface(databaseFile.get(databaseFile.size()-1), projectDir.get(projectDir.size()-1)));
+			dbInterface.add(new DatabaseInterface(databaseFile.get(databaseFile.size()-1), projectDir.get(projectDir.size()-1),name));
 			System.out.println(projectNames.get(projectNames.size()-1));
 		}
 		
@@ -205,7 +205,10 @@ public class LocView extends ViewPart {
 		// Example resource listener
 		listener = new IResourceChangeListener() {
 			public void resourceChanged(IResourceChangeEvent event) {
-				//dbInterface.updateDb();
+				for (DatabaseInterface data: dbInterface)
+				{
+					data.updateDb();
+				}
 				
 				System.out.print("Something changed in:");
 			}
@@ -260,7 +263,7 @@ public class LocView extends ViewPart {
 				String pName = name.substring(index+1, lindex);
 				if(pName.compareTo(projName) == 0)
 				{
-					files[i] = new File(this, i++, fName);
+					files[i] = new File(this, i++, fName, name);
 				}
 			}
 		}
@@ -280,12 +283,14 @@ public class LocView extends ViewPart {
 		Project project;
 		int	indx;
 		private String name;
+		String fullPath;
 
 
-		public File(Project pro, int i, String name_file){
+		public File(Project pro, int i, String name_file, String full){
 			name = name_file;
 			this.project = pro;
 			indx = i + 1;
+			fullPath = full;
 		}
 
 		public String toString(){
@@ -293,27 +298,38 @@ public class LocView extends ViewPart {
 		}
 
 		public String getLines(int i){
+			ArrayList<String> dates = new ArrayList<String>();;
+			HashMap<String, String> changes = new HashMap<String, String>();
+			for (DatabaseInterface data: dbInterface)
+			{
+				if(data.Name()==name)
+				{
+					dates = data.getLastChangesDates(5);
+					changes = data.getLastChangesOfLOCForFile(fullPath, 5);
+				}
+			}
+			
 			switch(i){
 			case 1: 
-				if (indx == 1)
-					return "90";
-				return "78";
+				if(dates.size()>0)
+					return changes.get(dates.get(1));
+				return "x";
 			case 2: 
-				if (indx == 1)
-					return "94";
-				return "73";
+				if(dates.size()>1)
+					return changes.get(dates.get(2));
+				return "x";
 			case 3: 
-				if (indx == 1)
-					return "30";
-				return "56";
+				if(dates.size()>2)
+					return changes.get(dates.get(3));
+				return "x";
 			case 4: 
-				if (indx == 1)
-					return "45";
-				return "98";
+				if(dates.size()>3)
+					return changes.get(dates.get(4));
+				return "x";
 			case 5: 
-				if (indx == 1)
-					return "50";
-				return "45";
+				if(dates.size()>4)
+					return changes.get(dates.get(5));
+				return "x";
 			}
 			return null;
 		}
@@ -344,7 +360,6 @@ public class LocView extends ViewPart {
 		}
 
 		public Object[] getElements(Object projects){
-			// cities ist das, was oben in setInput(..) gesetzt wurde.
 			return getChildren(projects);
 		}
 
