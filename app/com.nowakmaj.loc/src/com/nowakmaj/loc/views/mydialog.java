@@ -1,5 +1,8 @@
 package com.nowakmaj.loc.views;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Composite;
@@ -7,9 +10,11 @@ import org.eclipse.swt.widgets.MessageBox;
 import org.swtchart.Chart;
 import org.swtchart.IAxis;
 import org.swtchart.IAxisSet;
+import org.swtchart.IAxisTick;
 import org.swtchart.IBarSeries;
 import org.swtchart.ISeries;
 import org.swtchart.ISeries.SeriesType;
+import org.swtchart.ISeriesLabel;
 import org.swtchart.ISeriesSet;
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.swt.SWT;
@@ -22,50 +27,55 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Shell;
 
+
 public class mydialog extends Dialog {
 
-	private int num;
-	
-	public mydialog(Shell parentShell, int number) {
+
+	ArrayList<String> dates;// = new ArrayList<String>();
+	HashMap<String, String> changes;//= new HashMap<String, String>();
+
+	public mydialog(Shell parentShell, ArrayList<String> Dates, HashMap<String, String> Changes) {
 		super(parentShell);
-		
-		num = number;
+		dates = Dates;
+		changes = Changes;
 	}
 
 	@Override
 	protected Control createDialogArea(Composite parent) {
 		Composite container = (Composite) super.createDialogArea(parent);
-//		String [] dates = new String[num];
-//		for(int i=0; i<num; i++)
-//			dates[i] = " num " + i;
-		
-		
+
+
 		container.setLayout(new FillLayout());
 		Chart chart = new Chart(container, SWT.NONE);
-//		chart.getTitle().setText("SWT Chart");
-//		chart.getAxisSet().getXAxis(0).getTitle().setText("Operating Systems");
-//		chart.getAxisSet().getYAxis(0).getTitle().setText("Love");
-//		IAxisSet axisSet = chart.getAxisSet();
-//		IAxis xAxis = axisSet.getXAxis(0);
-//		
-//		
-//		
-//		xAxis.setCategorySeries(new String {"1","2", "3", "4"});
-//		xAxis.enableCategory(true);
-//
-//		IBarSeries series = (IBarSeries) chart.getSeriesSet().createSeries(
-//				SeriesType.BAR, "line series");
-//		series.setBarColor(container.getDisplay().getSystemColor(SWT.COLOR_RED));
-////		double[] values = new double[num];
-////		for(int i=1; i<=num; i++)
-////			values[i-1] = 0.5/i;
-		double[] values = { 0.5, 0.3, 0.1, 0.1};
-		ISeriesSet seriesSet = chart.getSeriesSet();
-		ISeries series = seriesSet.createSeries(SeriesType.LINE, "line series");
-		series.setYSeries(values);
+		chart.getTitle().setText("Wykres zmian LOC");
+		chart.getAxisSet().getXAxis(0).getTitle().setText("Kolejne zapisy");
+		chart.getAxisSet().getYAxis(0).getTitle().setText("Ilość linii");
 		IAxisSet axisSet = chart.getAxisSet();
-		axisSet.adjustRange();
 		
+		int i = 0;
+		double [] values = new double[dates.size()+2];
+
+		values[i++] = 0;
+		values[dates.size()+1] = 0; 
+		for (String name: dates)
+		{
+			values[i++] = Double.parseDouble(changes.get(name));
+		}
+
+		IBarSeries barSeries = (IBarSeries) chart.getSeriesSet()
+				.createSeries(SeriesType.BAR, "bar series");
+		barSeries.setYSeries(values);
+
+		// adjust the axis range
+		barSeries.setBarPadding(4);
+		barSeries.getLabel().setVisible(true);
+		chart.getAxisSet().adjustRange();
+		chart.getLegend().setVisible(false);
+
+		
+//				IAxisTick xTick = axisSet.getXAxis(0).getTick();
+//				xTick.setVisible(false);
+
 
 		return container;
 	}
@@ -86,6 +96,6 @@ public class mydialog extends Dialog {
 
 
 
-	
+
 
 }

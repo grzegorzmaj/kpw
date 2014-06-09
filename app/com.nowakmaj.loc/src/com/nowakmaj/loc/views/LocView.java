@@ -58,25 +58,25 @@ public class LocView extends ViewPart {
 
 	private IResourceChangeListener listener;
 	private TabFolder tabs;
-	
+
 	ArrayList<String> projectNames;
 	ArrayList<String> fileNames;
 	ArrayList<String> ext = new ArrayList<String>();
 	ProjectScanner projScan = new ProjectScanner();
 	FileScanner fileScan;
-	
+
 	java.io.File workspace;
 	String workspaceName;
-	
+
 	ArrayList<java.io.File> projectDir = new ArrayList<java.io.File>();
 	ArrayList<java.io.File> databaseFile = new ArrayList<java.io.File>();
 	ArrayList<DatabaseInterface> dbInterface = new ArrayList<DatabaseInterface>();
-	
-//	ArrayList<String> dates = dbInterface.getLastChangesDates(5);
-//	HashMap<String, String> changes =
-//    	dbInterface.getLastChangesOfLOCForFile("D:\\testDir\\asd.c", 5);
-//	HashMap<String, String> locpfs =
-//        dbInterface.getLastChangesOfLOCPF(5);
+
+	//	ArrayList<String> dates = dbInterface.getLastChangesDates(5);
+	//	HashMap<String, String> changes =
+	//    	dbInterface.getLastChangesOfLOCForFile("D:\\testDir\\asd.c", 5);
+	//	HashMap<String, String> locpfs =
+	//        dbInterface.getLastChangesOfLOCPF(5);
 
 
 	class ViewLabelProvider extends LabelProvider implements ILabelProvider{
@@ -97,26 +97,25 @@ public class LocView extends ViewPart {
 	 * The constructor.x
 	 */
 	public LocView() {
-		
+
 		ext.add("java");
 		fileScan = new FileScanner(ext);
 		workspaceName = ResourcesPlugin.getWorkspace().getRoot().getLocation().toString();
 		workspace  = new java.io.File(workspaceName);
 		projectNames =  projScan.getProjectNames(workspace);
 		fileNames =  fileScan.getFileNames(workspace);
-		
+
 		for(String name: projectNames) 
 		{
 			String newDir = workspaceName + "/" + name;
 			projectDir.add(new java.io.File(newDir));
 			newDir += "/testDb.xml"; 
-			System.out.println(newDir);
 			databaseFile.add(new java.io.File(newDir));
 			dbInterface.add(new DatabaseInterface(databaseFile.get(databaseFile.size()-1), projectDir.get(projectDir.size()-1),name));
-			System.out.println(projectNames.get(projectNames.size()-1));
+
 		}
-		
-//		System.out.println(workspaceName);
+
+		//		System.out.println(workspaceName);
 	}
 
 
@@ -127,7 +126,7 @@ public class LocView extends ViewPart {
 	 */
 	public void createPartControl(Composite parent) {
 		tabs = new TabFolder(parent, SWT.BOTTOM);
-		
+
 
 		for(String name: projectNames) 
 		{
@@ -138,7 +137,7 @@ public class LocView extends ViewPart {
 
 			Tree addressTree = new Tree(c, SWT.BORDER | SWT.H_SCROLL | SWT.V_SCROLL);
 			addressTree.setHeaderVisible(true);
-			TreeViewer m_treeViewer = new TreeViewer(addressTree);
+			final TreeViewer m_treeViewer = new TreeViewer(addressTree);
 
 			TreeColumn column1 = new TreeColumn(addressTree, SWT.LEFT);
 			addressTree.setLinesVisible(true);
@@ -170,21 +169,26 @@ public class LocView extends ViewPart {
 			m_treeViewer.setLabelProvider(new TableLabelProvider());
 			List<Project> projects = new ArrayList<Project>();
 			Project newProject = new Project(name, fileNames); 
-			
-			
+
+
 			projects.add(newProject);
 			m_treeViewer.setInput(projects);
 			m_treeViewer.expandAll();
 			it.setControl(c);
 			m_treeViewer.addDoubleClickListener(new IDoubleClickListener() {
-				
+
 				@Override
 				public void doubleClick(DoubleClickEvent event) {
-					// TODO Auto-generated method stub
-					showMessage("Double-click detected");
+					IStructuredSelection selection = (IStructuredSelection) m_treeViewer.getSelection();
+					if (selection.isEmpty()) return;
+
+					Object selectedElement = selection.getFirstElement();
+					File selectedFile = (File) selectedElement;
+					
+					showMessage(selectedFile);
 				}
 			});
-					
+
 		}
 		tabs.setSelection(0);
 
@@ -192,11 +196,21 @@ public class LocView extends ViewPart {
 		hookSave();
 	}
 
-	
 
-	private void showMessage(String message) {
-		
-		mydialog dialog = new mydialog(tabs.getShell(), 4);
+
+	private void showMessage(File selectedFile) 
+	{
+		ArrayList<String> dates = new ArrayList<String>();;
+		HashMap<String, String> changes = new HashMap<String, String>();
+		for (DatabaseInterface data: dbInterface)
+		{
+			if(data.Name().compareTo(selectedFile.getProject().toString())==0)
+			{
+				dates = data.getLastChangesDates(100);
+				changes = data.getLastChangesOfLOCForFile(selectedFile.getPath(), 100);
+			}
+		}
+		mydialog dialog = new mydialog(tabs.getShell(), dates, changes);
 		dialog.open();
 	}
 
@@ -209,13 +223,13 @@ public class LocView extends ViewPart {
 				{
 					data.updateDb();
 				}
-				
+
 				System.out.print("Something changed in:");
 			}
 
 		};
-		
-//		listener = new MyResourceChangeListener();
+
+		//		listener = new MyResourceChangeListener();
 		workspace.addResourceChangeListener(listener, IResourceChangeEvent.POST_CHANGE);
 	}
 
@@ -233,15 +247,15 @@ public class LocView extends ViewPart {
 
 		public Project(String name_proj, ArrayList<String> fileNames){
 			projName = name_proj;
-			
+
 			int i=0;
 			int index = 0;
 			int lindex = 0;
-			
+
 			int numFiles=0;
-			
+
 			index = workspaceName.length();
-			
+
 			for (String name: fileNames)
 			{
 				lindex = name.indexOf("/", index+1);
@@ -251,7 +265,7 @@ public class LocView extends ViewPart {
 					numFiles++;
 				}
 			}
-			
+
 			files = new File[numFiles];
 			for (String name: fileNames)
 			{
@@ -292,6 +306,16 @@ public class LocView extends ViewPart {
 			indx = i + 1;
 			fullPath = full;
 		}
+		
+		public String getPath()
+		{
+			return fullPath;
+		}
+		
+		public Project getProject()
+		{
+			return project;
+		}
 
 		public String toString(){
 			return name;
@@ -302,33 +326,36 @@ public class LocView extends ViewPart {
 			HashMap<String, String> changes = new HashMap<String, String>();
 			for (DatabaseInterface data: dbInterface)
 			{
-				if(data.Name()==name)
+				if(data.Name().compareTo(project.toString())==0)
 				{
 					dates = data.getLastChangesDates(5);
 					changes = data.getLastChangesOfLOCForFile(fullPath, 5);
 				}
 			}
-			
+
 			switch(i){
 			case 1: 
 				if(dates.size()>0)
-					return changes.get(dates.get(1));
+				{
+					if(changes.get(dates.get(0))!="-1")
+						return changes.get(dates.get(0));
+				}
 				return "x";
 			case 2: 
 				if(dates.size()>1)
-					return changes.get(dates.get(2));
+					return changes.get(dates.get(1));
 				return "x";
 			case 3: 
 				if(dates.size()>2)
-					return changes.get(dates.get(3));
+					return changes.get(dates.get(2));
 				return "x";
 			case 4: 
 				if(dates.size()>3)
-					return changes.get(dates.get(4));
+					return changes.get(dates.get(3));
 				return "x";
 			case 5: 
 				if(dates.size()>4)
-					return changes.get(dates.get(5));
+					return changes.get(dates.get(4));
 				return "x";
 			}
 			return null;
