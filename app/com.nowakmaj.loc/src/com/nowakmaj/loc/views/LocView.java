@@ -1,12 +1,21 @@
 package com.nowakmaj.loc.views;
 
 
+
+
 import java.util.ArrayList;
 import java.util.List;
+
+import java.io.File;
+import java.util.HashMap;
+
+import com.nowakmaj.loc.database.*;
+import com.nowakmaj.loc.scanner.*;
 
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Listener;
+import org.eclipse.swt.widgets.MessageBox;
 import org.eclipse.swt.widgets.TabFolder;
 import org.eclipse.swt.widgets.TabItem;
 import org.eclipse.swt.widgets.Tree;
@@ -19,6 +28,7 @@ import org.eclipse.core.resources.IResourceChangeListener;
 import org.eclipse.core.resources.IResourceDelta;
 import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.IStatus;
 import org.eclipse.jface.viewers.*;
 import org.eclipse.swt.custom.CTabFolder;
 import org.eclipse.swt.custom.CTabItem;
@@ -30,10 +40,13 @@ import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.graphics.Region;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.jface.action.*;
+import org.eclipse.jface.dialogs.InputDialog;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.ui.*;
 import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.SWT;
+
+
 
 
 public class LocView extends ViewPart {
@@ -45,18 +58,26 @@ public class LocView extends ViewPart {
 
 	private IResourceChangeListener listener;
 	private TabFolder tabs;
-	private Action doubleClickAction;
+	
+	ArrayList<String> projectNames;
+	ArrayList<String> fileNames;
+	ArrayList<String> ext = new ArrayList<String>();
+	ProjectScanner projScan = new ProjectScanner();
+	FileScanner fileScan;
+	
+	java.io.File workspace;
+	String workspaceName;
+	
+	ArrayList<java.io.File> projectDir = new ArrayList<java.io.File>();
+	ArrayList<java.io.File> databaseFile = new ArrayList<java.io.File>();
+	ArrayList<DatabaseInterface> dbInterface = new ArrayList<DatabaseInterface>();
+	
+//	ArrayList<String> dates = dbInterface.getLastChangesDates(5);
+//	HashMap<String, String> changes =
+//    	dbInterface.getLastChangesOfLOCForFile("D:\\testDir\\asd.c", 5);
+//	HashMap<String, String> locpfs =
+//        dbInterface.getLastChangesOfLOCPF(5);
 
-
-	/*
-	 * The content provider class is responsible for
-	 * providing objects to the view. It can wrap
-	 * existing objects in adapters or simply return
-	 * objects as-is. These objects may be sensitive
-	 * to the current input of the view, or ignore
-	 * it and always show the same content 
-	 * (like Task List, for example).
-	 */
 
 	class ViewLabelProvider extends LabelProvider implements ILabelProvider{
 		public String getColumnText(Object obj, int index){
@@ -73,9 +94,29 @@ public class LocView extends ViewPart {
 	}
 
 	/**
-	 * The constructor.
+	 * The constructor.x
 	 */
 	public LocView() {
+		
+		ext.add("java");
+		fileScan = new FileScanner(ext);
+		workspaceName = ResourcesPlugin.getWorkspace().getRoot().getLocation().toString();
+		workspace  = new java.io.File(workspaceName);
+		projectNames =  projScan.getProjectNames(workspace);
+		fileNames =  fileScan.getFileNames(workspace);
+		
+		for(String name: projectNames) 
+		{
+			String newDir = workspaceName + "/" + name;
+			projectDir.add(new java.io.File(newDir));
+			newDir += "/testDb.xml"; 
+			System.out.println(newDir);
+			databaseFile.add(new java.io.File(newDir));
+			dbInterface.add(new DatabaseInterface(databaseFile.get(databaseFile.size()-1), projectDir.get(projectDir.size()-1)));
+			System.out.println(projectNames.get(projectNames.size()-1));
+		}
+		
+//		System.out.println(workspaceName);
 	}
 
 
@@ -86,12 +127,12 @@ public class LocView extends ViewPart {
 	 */
 	public void createPartControl(Composite parent) {
 		tabs = new TabFolder(parent, SWT.BOTTOM);
+		
 
-
-		for(int l=0; l<2; l++) 
+		for(String name: projectNames) 
 		{
 			TabItem it = new TabItem(tabs, SWT.NONE);
-			it.setText("Tab " + l);
+			it.setText(name);
 			Composite c = new Composite(tabs, SWT.SINGLE);
 			c.setLayout(new FillLayout());
 
@@ -102,7 +143,7 @@ public class LocView extends ViewPart {
 			TreeColumn column1 = new TreeColumn(addressTree, SWT.LEFT);
 			addressTree.setLinesVisible(true);
 			column1.setAlignment(SWT.LEFT);
-			column1.setText("Folder/File");
+			column1.setText("Package/File");
 			column1.setWidth(160);
 			TreeColumn column2 = new TreeColumn(addressTree, SWT.RIGHT);
 			column2.setAlignment(SWT.LEFT);
@@ -127,9 +168,12 @@ public class LocView extends ViewPart {
 
 			m_treeViewer.setContentProvider(new AddressContentProvider());
 			m_treeViewer.setLabelProvider(new TableLabelProvider());
-			List<Project> cities = new ArrayList<Project>();
-			cities.add(new Project(2, "MyProject" + l));
-			m_treeViewer.setInput(cities);
+			List<Project> projects = new ArrayList<Project>();
+			Project newProject = new Project(name, fileNames); 
+			
+			
+			projects.add(newProject);
+			m_treeViewer.setInput(projects);
 			m_treeViewer.expandAll();
 			it.setControl(c);
 			m_treeViewer.addDoubleClickListener(new IDoubleClickListener() {
@@ -145,26 +189,15 @@ public class LocView extends ViewPart {
 		tabs.setSelection(0);
 
 
-		//makeActions();
 		hookSave();
 	}
 
-	//	private void makeActions() {
-	//		doubleClickAction = new Action() {
-	//			public void run() {
-	//				TabItem [] items = tabs.getSelection();
-	//				ISelection selection = 
-	//				Object obj = ((IStructuredSelection)selection).getFirstElement();
-	//				showMessage("Double-click detected on "+obj.toString());
-	//			}
-	//		};
-	//	}
+	
 
 	private void showMessage(String message) {
-		MessageDialog.openInformation(
-				tabs.getShell(),
-				"Sample View",
-				message);
+		
+		mydialog dialog = new mydialog(tabs.getShell(), 4);
+		dialog.open();
 	}
 
 	private void hookSave(){
@@ -172,13 +205,14 @@ public class LocView extends ViewPart {
 		// Example resource listener
 		listener = new IResourceChangeListener() {
 			public void resourceChanged(IResourceChangeEvent event) {
-
-				System.out.println("Something changed!");
-
+				//dbInterface.updateDb();
+				
+				System.out.print("Something changed in:");
 			}
 
 		};
-
+		
+//		listener = new MyResourceChangeListener();
 		workspace.addResourceChangeListener(listener, IResourceChangeEvent.POST_CHANGE);
 	}
 
@@ -186,43 +220,49 @@ public class LocView extends ViewPart {
 	 * Passing the focus request to the viewer's control.
 	 */
 	public void setFocus() {
-		//m_treeViewer.getControl().setFocus();
 		tabs.isFocusControl();
 	}
 
 	class Project{
-		Folder[]	folders;
-		private String name; 
-
-		public Project(int num_of_fold, String name_proj){
-			name = name_proj;
-			folders = new Folder[num_of_fold];
-			for (int i = 0; i < folders.length; i++)
-				folders[i] = new Folder(this, i, 5, "fold"+i);
-		}
-
-		public Folder[] getFolders(){
-			return folders;
-		}
-
-		public String toString(){
-			return name;
-		}
-	}
-
-	class Folder{
-		Project	Project;
 		File[]	files;
 		int		indx;
-		private String name;
+		private String projName;
 
-		public Folder(Project Project, int index, int num_files, String name_fold){
-			this.Project = Project;
-			name = name_fold;
-			indx = index + 1;
-			files = new File[num_files];
-			for (int i = 0; i < files.length; i++)
-				files[i] = new File(this, i, "file"+i);
+		public Project(String name_proj, ArrayList<String> fileNames){
+			projName = name_proj;
+			
+			int i=0;
+			int index = 0;
+			int lindex = 0;
+			
+			int numFiles=0;
+			
+			index = workspaceName.length();
+			
+			for (String name: fileNames)
+			{
+				lindex = name.indexOf("/", index+1);
+				String pName = name.substring(index+1, lindex);
+				if(pName.compareTo(projName) == 0)
+				{
+					numFiles++;
+				}
+			}
+			
+			files = new File[numFiles];
+			for (String name: fileNames)
+			{
+				index = name.lastIndexOf("/");
+				index = name.lastIndexOf("/", index-1);
+				String fName = name.substring(index+1);
+				index = workspaceName.length();
+				lindex = name.indexOf("/", index+1);
+				String pName = name.substring(index+1, lindex);
+				if(pName.compareTo(projName) == 0)
+				{
+					files[i] = new File(this, i++, fName);
+				}
+			}
 		}
 
 		public File[] getFiles(){
@@ -230,20 +270,21 @@ public class LocView extends ViewPart {
 		}
 
 		public String toString(){
-			return name;
+			return projName;
 		}
 	}
 
 
+
 	class File{
-		Folder	Folder;
+		Project project;
 		int	indx;
 		private String name;
 
 
-		public File(Folder Folder, int i, String name_file){
+		public File(Project pro, int i, String name_file){
 			name = name_file;
-			this.Folder = Folder;
+			this.project = pro;
 			indx = i + 1;
 		}
 
@@ -284,17 +325,13 @@ public class LocView extends ViewPart {
 			if (parentElement instanceof List)
 				return ((List<?>) parentElement).toArray();
 			if (parentElement instanceof Project)
-				return ((Project) parentElement).getFolders();
-			if (parentElement instanceof Folder)
-				return ((Folder) parentElement).getFiles();
+				return ((Project) parentElement).getFiles();
 			return new Object[0];
 		}
 
 		public Object getParent(Object element){
-			if (element instanceof Folder)
-				return ((Folder) element).Project;
 			if (element instanceof File)
-				return ((File) element).Folder;
+				return ((File) element).project;
 			return null;
 		}
 
@@ -302,15 +339,13 @@ public class LocView extends ViewPart {
 			if (element instanceof List)
 				return ((List<?>) element).size() > 0;
 				if (element instanceof Project)
-					return ((Project) element).getFolders().length > 0;
-					if (element instanceof Folder)
-						return ((Folder) element).getFiles().length > 0;
-						return false;
+					return ((Project) element).getFiles().length > 0;
+					return false;
 		}
 
-		public Object[] getElements(Object cities){
+		public Object[] getElements(Object projects){
 			// cities ist das, was oben in setInput(..) gesetzt wurde.
-			return getChildren(cities);
+			return getChildren(projects);
 		}
 
 		public void dispose(){

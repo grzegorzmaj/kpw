@@ -1,4 +1,0 @@
-INDEX VERSION 1.126+/home/grzegorz/mgr_3-sem/kpw/kpw/app/.metadata/.plugins/org.eclipse.jdt.core
-1220062808.index
-1526914363.index
-1798868356.index
