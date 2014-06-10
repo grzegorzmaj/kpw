@@ -22,6 +22,17 @@ public class ProjectScanner {
 		validator_ = new FileValidator(ext);
 	}
 	
+	public boolean isFileFromProject(File file, String projectName, String workspacePath)
+	{
+		while (file.getPath() != workspacePath)
+		{
+			if (file.getName().contains(projectName))
+				return true;
+			file = file.getParentFile();
+		}
+		return false;
+	}
+	
 	public ArrayList<String> getProjectNames(File dir)
 	{
 		ArrayList<File> files = getFiles(dir);
