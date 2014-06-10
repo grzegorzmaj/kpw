@@ -183,11 +183,16 @@ public class LocView extends ViewPart {
 				public void doubleClick(DoubleClickEvent event) {
 					IStructuredSelection selection = (IStructuredSelection) m_treeViewer.getSelection();
 					if (selection.isEmpty()) return;
+					
 
 					Object selectedElement = selection.getFirstElement();
-					File selectedFile = (File) selectedElement;
-
-					showMessage(selectedFile);
+					
+					Item sel = (Item) selectedElement;
+					if(sel.isFile())
+					{
+						File selectedFile = (File) selectedElement;
+						showMessage(selectedFile);
+					}
 				}
 			});
 
@@ -249,8 +254,15 @@ public class LocView extends ViewPart {
 	public void setFocus() {
 		tabs.isFocusControl();
 	}
+	
+	public interface Item
+	{
+		abstract boolean isProject();
+		abstract boolean isFile();
+	}
+	
 
-	class Project{
+	class Project implements Item{
 		File[]	files;
 		ArrayList<File> files2 = new ArrayList<File>();
 		private String projName;
@@ -276,11 +288,21 @@ public class LocView extends ViewPart {
 		public String toString(){
 			return projName;
 		}
+
+		@Override
+		public boolean isProject() {
+			return true;
+		}
+
+		@Override
+		public boolean isFile() {
+			return false;
+		}
 	}
 
 
 
-	class File{
+	class File implements Item{
 		Project project;
 		private String name;
 		String fullPath;
@@ -348,6 +370,16 @@ public class LocView extends ViewPart {
 				return "x";
 			}
 			return null;
+		}
+
+		@Override
+		public boolean isProject() {
+			return false;
+		}
+
+		@Override
+		public boolean isFile() {
+			return true;
 		}
 	}
 

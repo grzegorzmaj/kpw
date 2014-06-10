@@ -269,32 +269,60 @@ historiê zmiany plików i pozwala na przejrzyst¹ wizualizacjê zebranych danych.
 	
 	\subsection{Zaimplementowane kryteria oceny}
 	
-	\subsection{Utworzona wtyczka}
-
+	W proponowanej wtyczce zosta³y zaimplementowane dwa podstawowe miary pracy programisty
 	
+	\subsection{Utworzona wtyczka}
+	
+		\paragraph{Przechowywanie danych}
+	
+		
 
-\begin{figure}
-	\centering
-	\includegraphics[width=\textwidth]{graphics/view.jpg}
-	\caption{Widok na podstawowy wygl¹d wtyczki.}
-	\label{fig:view}
-\end{figure}
+		\paragraph{Widok i pos³ugiwanie siê wtyczk¹}
+		
+		Po zainstalowaniu wtyczki pojawi siê mo¿liwoœæ dodania nowego widoku, w którym wtyczka bêdzie
+		widoczna. Aby wtyczka siê uaktywni³a nale¿y przejœæ w górnym menu Eclipsa
+		\textit{Window$\rightarrow$Show View$\rightarrow$Other\dots} w pojawiaj¹cym siê okienku
+		przechodzimy do \textit{Loc category$\rightarrow$Loc View}. Po tej operacji (pokazana na rysunku
+		\ref{fig:view_wybor}  wtyczka poka¿e siê na dolnym panelu wtyczek.
+		
+		\begin{figure}
+			\centering
+			\includegraphics[width=\textwidth]{graphics/wybor.jpg}
+			\caption{Widok na wybór widoku wtyczki.}
+			\label{fig:view_wybor}
+		\end{figure}
+				
+		Po uruchomieniu wtyczki bêdzie dostêpny podstawowy widok historii plików w projektach. Na dole 
+		okna uporz¹dkowane s¹ wszystkie projekty. Dla ka¿dej zak³adki wyœwietlone s¹ wszystkie pliki
+		nale¿¹ce do danego projektu wraz histori¹ 5 ostatnich zmian w iloœci linii kodu (miara LOC).
+		Widok pojedynczego projektu zosta³ pokazany na rysunku \ref{fig:view}. Mo¿na te¿ zwin¹æ pliki 
+		nale¿¹ce do jednego z projektów, wtedy bêdzie wyœwietlana tylko nazwa danego projektu.
+
+		\begin{figure}
+			\centering
+			\includegraphics[width=\textwidth]{graphics/view.jpg}
+			\caption{Widok na podstawowy wygl¹d wtyczki.}
+			\label{fig:view}
+		\end{figure}
+
+		Dostêp do pozosta³ej historii zmian plików dostêpny jest poprzez dwukrotne klikniêcie na 
+
+		\begin{figure}
+			\centering
+			\includegraphics[width=\textwidth]{graphics/chartLOC.jpg}
+			\caption{Widok na okno wykresów LOC.}
+			\label{fig:LOC}
+		\end{figure}
 
 
-\begin{figure}
-	\centering
-	\includegraphics[width=\textwidth]{graphics/chartLOC.jpg}
-	\caption{Widok na okno wykresów LOC.}
-	\label{fig:LOC}
-\end{figure}
+		\begin{figure}
+			\centering
+			\includegraphics[width=\textwidth]{graphics/chartLOCPF.jpg}
+			\caption{Widok na okno wykresów LOCPF.}
+			\label{fig:LOCPF}
+		\end{figure}
 
 
-\begin{figure}
-	\centering
-	\includegraphics[width=\textwidth]{graphics/chartLOCPF.jpg}
-	\caption{Widok na okno wykresów LOCPF.}
-	\label{fig:LOCPF}
-\end{figure}
 
 
 
