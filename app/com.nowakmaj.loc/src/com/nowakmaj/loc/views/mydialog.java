@@ -66,7 +66,9 @@ public class mydialog extends Dialog {
 		for (String name: dates)
 		{
 			labels[i] = Integer.toString(i);
-			values[i++] = Double.parseDouble(changes.get(name));
+			values[i] = Double.parseDouble(changes.get(name));
+			if(values[i++]==-1)
+				values[i-1]=0;
 		}
 
 		IBarSeries barSeries = (IBarSeries) chart.getSeriesSet()
@@ -107,7 +109,9 @@ public class mydialog extends Dialog {
 		values[dates.size()+1] = 0; 
 		for (String name: dates)
 		{
-			values2[i2++] = Double.parseDouble(changesLocpf.get(name));
+			values2[i2] = Double.parseDouble(changesLocpf.get(name));
+			if(values2[i++]==-1)
+				values2[i-1]=0;
 		}
 
 		IBarSeries barSeries2 = (IBarSeries) chart2.getSeriesSet()

@@ -94,7 +94,7 @@ Z tego tytu³u daj¹ pewien obraz pracy w³o¿onej przez ka¿dego wspó³pracownika. Po
 
 \subsection{Systemy do statycznej analizy kodu}
 
-Platformami najbardziej zbli¿onymi do zmian w samym kodzie projektu, a nie tylko du¿ymi zmianami w
+Platformami najbardziej zbli¿onymi do zmian w samym kodzie projektu, a~nie tylko du¿ymi zmianami w
 strukturze ca³ego projektu, b¹dŸ gotowymi dzia³aj¹cymi zmianami obserwowanymi poprzez zmianê plików w 
 repozytorium, s¹ systemy do statycznej analizy kodu. Ich cech¹ jest praca równolegle do tworzonego kodu, a 
 nie obserwacja zmian etapami. Obecnie s¹ powszechnie dostêpne platformy obs³uguj¹ce wszystkie popularne 
@@ -103,7 +103,7 @@ jêzyki programowania. Przyk³adami takich systemów s¹:
 \begin{itemize}
 	\item \textbf{Klocwork}
 	
-	Klockwork jest zamkniêtym programem przeznaczonym do statycznej ana lizy kodu pozwalaj¹cym na detekcjê
+	Klockwork jest zamkniêtym programem przeznaczonym do statycznej analizy kodu pozwalaj¹cym na detekcjê
 	b³êdów strukturalnych kodu i b³êdów przebiegu programu. Umo¿liwia pracê z najpopularniejszymi jêzykami
 	C, C++, Java czy C\#.
 		 
@@ -283,7 +283,10 @@ historiê zmiany plików i pozwala na przejrzyst¹ wizualizacjê zebranych danych.
 	\subsection{Eclipse PDE}
 	
 	Do œrodowiska Eclipse jest dostarczany plug-in PDE (\textit{Plug-in Development Enviroment}
-	umo¿liwiaj¹cy rozwijanie kolejnych wtyczek do programu Eclipse.
+	umo¿liwiaj¹cy rozwijanie kolejnych wtyczek do programu Eclipse. Wtyczka zapewnia inn¹ perspektywê
+	(zmiana personalizacji okna g³ównego) przez co automatycznie po napisaniu kodu nowej wtyczki mo¿emy
+	przejœæ do jej kompilacji i debugowania. Minusem jest uruchamianie nowego okna systemu Eclipse, w 
+	którym uruchomiona jest wtyczka, co powoduje znaczne obci¹¿enie pamiêci operacyjnej komputera.
 	
 	\subsection{Zaimplementowane kryteria oceny kodu}
 	
@@ -292,13 +295,13 @@ historiê zmiany plików i pozwala na przejrzyst¹ wizualizacjê zebranych danych.
 	
 	\subsection{Utworzona wtyczka}
 	
-		\paragraph{Przechowywanie danych}
+		\paragraph{Przechowywanie danych\\}
 	
 		
 
-		\paragraph{Widok i pos³ugiwanie siê wtyczk¹}
+		\paragraph{Widok i pos³ugiwanie siê wtyczk¹\\}
 		
-		Po zainstalowaniu wtyczki pojawi siê mo¿liwoœæ dodania nowego widoku, w którym wtyczka bêdzie
+		Po zainstalowaniu wtyczki pojawi siê mo¿liwoœæ dodania nowego widoku, w~którym wtyczka bêdzie
 		widoczna. Aby wtyczka siê uaktywni³a nale¿y przejœæ w górnym menu Eclipsa
 		\textit{Window$\rightarrow$Show View$\rightarrow$Other\dots} w pojawiaj¹cym siê okienku
 		przechodzimy do \textit{Loc category$\rightarrow$Loc View}. Po tej operacji (pokazana na rysunku

@@ -80,7 +80,7 @@ public class LocView extends ViewPart {
 		workspaceName = ResourcesPlugin.getWorkspace().getRoot().getLocation().toString();
 		workspace  = new java.io.File(workspaceName);
 		projectNames =  projScan.getProjectNames(workspace);
-		fileNames =  fileScan.getFileNames(workspace);
+		fileNames =  fileScan.getFileNames(workspace) ;
 		
 		DatabaseScanner dbScanner = new DatabaseScanner();
 		for(String name: projectNames) 
