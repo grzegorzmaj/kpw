@@ -1,4 +1,4 @@
-package scanner;
+package com.nowakmaj.loc.scanner;
 
 import java.io.File;
 import java.io.IOException;

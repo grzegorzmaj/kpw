@@ -1,4 +1,4 @@
-package database;
+package com.nowakmaj.loc.database;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.Element;

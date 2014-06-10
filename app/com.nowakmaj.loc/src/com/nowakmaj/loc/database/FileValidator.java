@@ -1,4 +1,4 @@
-package database;
+package com.nowakmaj.loc.database;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.regex.Matcher;

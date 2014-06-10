@@ -1,4 +1,4 @@
-package database;
+package com.nowakmaj.loc.database;
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -12,6 +12,7 @@ public class DatabaseInterface {
 	DatabaseCreator dbCreator_;
 	WorkspaceScanner scanner_;
 	File projectDir_;
+	String projectName_;
 	
 	public static String retrieveTimeStamp()
 	{
@@ -20,13 +21,19 @@ public class DatabaseInterface {
 		return sdf.format(date);
 	}
 	
-	public DatabaseInterface(File dbFile, File projectDir)
+	public DatabaseInterface(File dbFile, File projectDir, String projectName)
 	{
 		projectDir_ = projectDir;
+		projectName_ = projectName; 
 		dbManager_ = new DatabaseManager(dbFile);
 		dbReader_ = new DatabaseReader(dbManager_.getDatabaseDocument());
 		scanner_ = new WorkspaceScanner();
 		dbCreator_ = new DatabaseCreator();
+	}
+	
+	public String getProjectName()
+	{
+		return projectName_;
 	}
 	
 	public void updateDb()
@@ -50,8 +57,8 @@ public class DatabaseInterface {
 		return dbReader_.getLastChangesOfLOCPF(changesCnt);
 	}
 
-	public void initializeDatabase(File projectDir)
+	public static void initializeDatabase(File projectDir)
 	{
-		dbCreator_.createDatabaseInProjectDir(projectDir);
+		DatabaseCreator.createDatabaseInProjectDir(projectDir);
 	}
 }
