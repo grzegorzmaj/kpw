@@ -134,23 +134,23 @@ public class LocView extends ViewPart {
 			column1.setWidth(160);
 			TreeColumn column2 = new TreeColumn(addressTree, SWT.RIGHT);
 			column2.setAlignment(SWT.LEFT);
-			column2.setText("num of lines");
+			column2.setText("last change");
 			column2.setWidth(100);
 			TreeColumn column3 = new TreeColumn(addressTree, SWT.RIGHT);
 			column3.setAlignment(SWT.LEFT);
-			column3.setText("num of lines");
+			column3.setText("2. change");
 			column3.setWidth(100);
 			TreeColumn column4 = new TreeColumn(addressTree, SWT.RIGHT);
 			column4.setAlignment(SWT.LEFT);
-			column4.setText("num of lines");
+			column4.setText("3. change");
 			column4.setWidth(100);
 			TreeColumn column5 = new TreeColumn(addressTree, SWT.RIGHT);
 			column5.setAlignment(SWT.LEFT);
-			column5.setText("num of lines");
+			column5.setText("4. change");
 			column5.setWidth(100);
 			TreeColumn column6 = new TreeColumn(addressTree, SWT.RIGHT);
 			column6.setAlignment(SWT.LEFT);
-			column6.setText("num of lines");
+			column6.setText("5. change");
 			column6.setWidth(100);
 
 			m_treeViewer.setContentProvider(new AddressContentProvider());
