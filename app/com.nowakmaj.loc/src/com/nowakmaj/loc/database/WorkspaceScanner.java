@@ -1,4 +1,5 @@
 package com.nowakmaj.loc.database;
+
 import java.io.File;
 import java.util.ArrayList;
  

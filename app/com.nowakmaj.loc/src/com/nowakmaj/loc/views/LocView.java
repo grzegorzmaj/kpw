@@ -1,53 +1,27 @@
 package com.nowakmaj.loc.views;
 
-
-
-
 import java.util.ArrayList;
 import java.util.List;
-import java.io.File;
 import java.util.HashMap;
 
 import com.nowakmaj.loc.database.*;
 import com.nowakmaj.loc.scanner.*;
 
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Event;
-import org.eclipse.swt.widgets.Listener;
-import org.eclipse.swt.widgets.MessageBox;
 import org.eclipse.swt.widgets.TabFolder;
 import org.eclipse.swt.widgets.TabItem;
 import org.eclipse.swt.widgets.Tree;
 import org.eclipse.swt.widgets.TreeColumn;
-import org.eclipse.swt.widgets.TreeItem;
 import org.eclipse.ui.part.*;
-import org.eclipse.core.internal.resources.projectvariables.ParentVariableResolver;
-import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IResourceChangeEvent;
 import org.eclipse.core.resources.IResourceChangeListener;
-import org.eclipse.core.resources.IResourceDelta;
 import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.ResourcesPlugin;
-import org.eclipse.core.runtime.IStatus;
 import org.eclipse.jface.viewers.*;
-import org.eclipse.swt.custom.CTabFolder;
-import org.eclipse.swt.custom.CTabItem;
-import org.eclipse.swt.graphics.Color;
-import org.eclipse.swt.graphics.GC;
 import org.eclipse.swt.graphics.Image;
-import org.eclipse.swt.graphics.Path;
-import org.eclipse.swt.graphics.Rectangle;
-import org.eclipse.swt.graphics.Region;
 import org.eclipse.swt.layout.FillLayout;
-import org.eclipse.jface.action.*;
-import org.eclipse.jface.dialogs.InputDialog;
-import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.ui.*;
-import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.SWT;
-
-
-
 
 public class LocView extends ViewPart {
 
@@ -105,14 +79,23 @@ public class LocView extends ViewPart {
 		workspace  = new java.io.File(workspaceName);
 		projectNames =  projScan.getProjectNames(workspace);
 		fileNames =  fileScan.getFileNames(workspace);
-
+		
+		DatabaseScanner dbScanner = new DatabaseScanner();
 		for(String name: projectNames) 
 		{
-			String newDir = workspaceName + "/" + name;
-			projectDir.add(new java.io.File(newDir));
-			newDir += "/testDb.xml"; 
-			databaseFile.add(new java.io.File(newDir));
-			dbInterface.add(new DatabaseInterface(databaseFile.get(databaseFile.size()-1), projectDir.get(projectDir.size()-1),name));
+			java.io.File projectFile =
+				new java.io.File(workspaceName + java.io.File.separator + name);
+			projectDir.add(projectFile);
+			java.io.File dbFile = dbScanner.findDatabaseForProject(
+				new java.io.File(workspaceName), name);
+			if (dbFile == null)
+			{
+				DatabaseInterface.initializeDatabase(dbScanner.getProjectDir());
+				dbFile = dbScanner.findDatabaseForProject(
+					new java.io.File(workspaceName), name);
+			}
+			databaseFile.add(dbFile);
+			dbInterface.add(new DatabaseInterface(dbFile, projectFile, name));
 
 		}
 
@@ -218,7 +201,7 @@ public class LocView extends ViewPart {
 		HashMap<String, String> changesLocpf = new HashMap<String, String>();
 		for (DatabaseInterface data: dbInterface)
 		{
-			if(data.Name().compareTo(selectedFile.getProject().toString())==0)
+			if(data.getProjectName().compareTo(selectedFile.getProject().toString())==0)
 			{
 				dates = data.getLastChangesDates(100);
 				changes = data.getLastChangesOfLOCForFile(selectedFile.getPath(), 100);
@@ -333,7 +316,7 @@ public class LocView extends ViewPart {
 			HashMap<String, String> changes = new HashMap<String, String>();
 			for (DatabaseInterface data: dbInterface)
 			{
-				if(data.Name().compareTo(project.toString())==0)
+				if(data.getProjectName().compareTo(project.toString())==0)
 				{
 					dates = data.getLastChangesDates(5);
 					changes = data.getLastChangesOfLOCForFile(fullPath, 5);

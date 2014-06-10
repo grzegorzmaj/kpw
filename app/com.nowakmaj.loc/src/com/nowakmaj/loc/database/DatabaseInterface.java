@@ -7,12 +7,12 @@ import java.util.HashMap;
 
 public class DatabaseInterface {
 
-	String projName;
 	DatabaseManager dbManager_;
 	DatabaseReader dbReader_;
+	DatabaseCreator dbCreator_;
 	WorkspaceScanner scanner_;
 	File projectDir_;
-	
+	String projectName_;
 	
 	public static String retrieveTimeStamp()
 	{
@@ -21,18 +21,19 @@ public class DatabaseInterface {
 		return sdf.format(date);
 	}
 	
-	public DatabaseInterface(File dbFile, File projectDir, String Proj)
+	public DatabaseInterface(File dbFile, File projectDir, String projectName)
 	{
-		projName = Proj;
 		projectDir_ = projectDir;
+		projectName_ = projectName; 
 		dbManager_ = new DatabaseManager(dbFile);
 		dbReader_ = new DatabaseReader(dbManager_.getDatabaseDocument());
 		scanner_ = new WorkspaceScanner();
+		dbCreator_ = new DatabaseCreator();
 	}
 	
-	public String Name()
+	public String getProjectName()
 	{
-		return projName;
+		return projectName_;
 	}
 	
 	public void updateDb()
@@ -54,5 +55,10 @@ public class DatabaseInterface {
 	public HashMap<String, String> getLastChangesOfLOCPF(int changesCnt)
 	{
 		return dbReader_.getLastChangesOfLOCPF(changesCnt);
+	}
+
+	public static void initializeDatabase(File projectDir)
+	{
+		DatabaseCreator.createDatabaseInProjectDir(projectDir);
 	}
 }
