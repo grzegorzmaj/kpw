@@ -1,4 +1,4 @@
-package com.nowakmaj.loc.database;
+package database;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;

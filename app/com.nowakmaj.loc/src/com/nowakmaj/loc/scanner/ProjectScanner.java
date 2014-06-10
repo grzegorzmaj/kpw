@@ -1,4 +1,4 @@
-package com.nowakmaj.loc.scanner;
+package scanner;
 
 import java.io.File;
 import java.io.IOException;
@@ -20,17 +20,6 @@ public class ProjectScanner {
 		ArrayList<String> ext = new ArrayList<String>();
 		ext.add("project");
 		validator_ = new FileValidator(ext);
-	}
-	
-	public boolean isFileFromProject(File file, String projectName, String workspacePath)
-	{
-		while (file.getPath() != workspacePath)
-		{
-			if (file.getName().contains(projectName))
-				return true;
-			file = file.getParentFile();
-		}
-		return false;
 	}
 	
 	public ArrayList<String> getProjectNames(File dir)

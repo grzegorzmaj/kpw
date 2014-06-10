@@ -1,4 +1,4 @@
-package com.nowakmaj.loc.database;
+package database;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;

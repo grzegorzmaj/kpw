@@ -1,4 +1,4 @@
-package com.nowakmaj.loc.scanner;
+package scanner;
 
 import java.io.File;
 import java.util.ArrayList;

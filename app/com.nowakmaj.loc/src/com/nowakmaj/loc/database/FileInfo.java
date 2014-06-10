@@ -1,4 +1,4 @@
-package com.nowakmaj.loc.database;
+package database;
 public class FileInfo {
 	public String path;
 	public Integer linesOfCode;
