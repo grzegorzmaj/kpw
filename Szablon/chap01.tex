@@ -46,18 +46,26 @@ Daj¹ one mo¿liwoœæ œledzenia postêpu prac poczynionych przez poszczególnych prac
 
 
 	\subsubsection{Git}
-	Git jest rozproszonym systemem kontroli wersji. Jest to wolne oprogramowanie udostêpnione na licencji GNU GPL2. Git powsta³ jako alternatywa dla zamkniêtego systemu BitKeeper w kwietniu 2005 roku do rowijania projektu Linux.
+	Git jest rozproszonym systemem kontroli wersji. Jest to wolne oprogramowanie udostêpnione na licencji
+	GNU GPL2. Git powsta³ jako alternatywa dla zamkniêtego systemu BitKeeper w kwietniu 2005 roku do
+	rozwijania projektu Linux.
 	
 	\subsubsection{Svn}
-	Subversion jest wolnym syetmem kontroli wersji udostêpnionym na licencji Apache. Zosta³ stworzony do zast¹pienia systemu CVS.
+	Subversion jest wolnym systemem kontroli wersji udostêpnionym na licencji Apache. Zosta³ stworzony do
+	zast¹pienia systemu CVS.
 	
 	\subsubsection{Mercurial}
-	Marcurial podobnie jak Git jest rozproszonym systemem kontroli wersji. Zosta³ napisany w tym samym czasie jak Git, te¿ w celu pomocy do rozwijania projektu Linux. Jest wykorzystywany w wielu projektach otwartoŸród³owych.
+	Marcurial podobnie jak Git jest rozproszonym systemem kontroli wersji. Zosta³ napisany w tym samym
+	czasie jak Git, te¿ w celu pomocy do rozwijania projektu Linux. Jest wykorzystywany w wielu projektach
+	otwartoŸród³owych.
 
 \subsection{Systemy zarz¹dzania projektem}
 
+Systemy zarz¹dzania projektem s¹ platformami wspomagaj¹cymi podzia³ prac i weryfikacjê postêpów prac.
+Z tego tytu³u daj¹ pewien obraz pracy w³o¿onej przez ka¿dego wspó³pracownika. Poni¿ej zosta³y przedstawione najpopularniejsze systemy zarz¹dzania:
+
 \begin{itemize}
-	\item Redmine
+	\item \textbf{Redmine}
 	
 	Redmine jeœ wolnym, otwartoŸród³owym internetowym narzêdziem do zarz¹dzania projektem i szukania
 	b³êdów. Udostêpnia kalendarz i wykres Ganta wraz ze wsparciem wizualnym by ³atwiej kontrolowaæ
@@ -65,7 +73,7 @@ Daj¹ one mo¿liwoœæ œledzenia postêpu prac poczynionych przez poszczególnych prac
 	zadañ w grupie. Narzêdzie Redmine jest oparte o framework Ruby on Rails, co zapewnia mu przenoœnoœæ.
 
 	
-	\item Jira
+	\item \textbf{Jira}
 	
 	JIRA jest zamkniêtym oprogramowaniem stworzonym przez firmê Atlassian, które ma na celu wspomaganie w
 	zarz¹dzaniu projektem i œledzeniu b³êdów. Jest wykorzystywana w wielu projektach m.in. Fedora
@@ -73,7 +81,7 @@ Daj¹ one mo¿liwoœæ œledzenia postêpu prac poczynionych przez poszczególnych prac
 	Atlassian  udostêpnia program JIRA nieodp³atnie do u¿ytku non-profit.
 
 
-	\item GitHub.
+	\item \textbf{GitHub}
 	
 	GitHub jest serwisem hostingowym dla projektów wykorzystuj¹cych system kontroli wersji Git. Udostêpnia
 	darmowe otwarte repozytoria a tak¿e p³atne repozytoria zamkniête. Oprócz podstawowego zadania jakim
@@ -86,21 +94,27 @@ Daj¹ one mo¿liwoœæ œledzenia postêpu prac poczynionych przez poszczególnych prac
 
 \subsection{Systemy do statycznej analizy kodu}
 
+Platformami najbardziej zbli¿onymi do zmian w samym kodzie projektu, a nie tylko du¿ymi zmianami w
+strukturze ca³ego projektu, b¹dŸ gotowymi dzia³aj¹cymi zmianami obserwowanymi poprzez zmianê plików w 
+repozytorium, s¹ systemy do statycznej analizy kodu. Ich cech¹ jest praca równolegle do tworzonego kodu, a 
+nie obserwacja zmian etapami. Obecnie s¹ powszechnie dostêpne platformy obs³uguj¹ce wszystkie popularne 
+jêzyki programowania. Przyk³adami takich systemów s¹:
+
 \begin{itemize}
-	\item Klocwork,
+	\item \textbf{Klocwork}
 	
 	Klockwork jest zamkniêtym programem przeznaczonym do statycznej ana lizy kodu pozwalaj¹cym na detekcjê
 	b³êdów strukturalnych kodu i b³êdów przebiegu programu. Umo¿liwia pracê z najpopularniejszymi jêzykami
 	C, C++, Java czy C\#.
 		 
-	\item Pylint,
+	\item \textbf{Pylint}
 	
 	Pylint jest otwrtoŸród³owym oprogramowaniem do znajdywania b³êdów w kodzie i sprawdzania jego jakoœci.
 	Pylint jest podobny do innego oprogramowania Pychecker ale jest bardziej rozbudowany. Wspiera miêdzy
 	innymi sprawdzanie d³ugoœci linii, sprawdzanie zgodnoœci nazw zmiennych ze standardem kodowania czy 
 	tworzenie diagramów UML ze stworzonego kodu.
 	
-	\item CodeSonar,
+	\item \textbf{CodeSonar}
 	
 	CodeSonar jest zamkniêtym oprogramowaniem analizuj¹cym kod poz wzglêdem bezpieczeñstwa i poprawnoœci.
 	Wspiera oprogramowanie napisane w C, C++ i Java. Jest wykorzystywany w wielu ga³êziach gospodarki
@@ -217,9 +231,13 @@ zwiêkszyæ zwiêz³oœæ (i czytelnoœæ) kodu, do operacji zamiany wartoœci dwóch elem
 zastosowano funkcjê z biblioteki standardowej, która ma dok³adnie takie samo dzia³anie jak kod
 z przyk³adu pierwszego.
 
-\subsubsection[Linie kodu na plik Ÿród³owy][Linie kodu na plik Ÿród³owy]
-{Linie kodu na plik Ÿród³owy}
+\subsubsection[Linie kodu na plik Ÿród³owy (LOCPF)][Linie kodu na plik Ÿród³owy (LOCPF)]
+{Linie kodu na plik Ÿród³owy (LOCPF)}
 \label{subsubsec:linieKoduNaPlik}
+
+Kolejn¹ metryk¹ zwi¹zan¹ z iloœci¹ linii kodu w plikach jest miara iloœci linii kodu na plik. Metryka ta
+jest œciœle zwi¹zana ze struktur¹ tworzenia oprogramowania jak¹ jest projekt. Do tej oceny brane s¹ pod
+uwagê pliki Ÿród³owe, a pomijane pliki konfiguracyjnych nie wnosz¹ce nic do oceny jakoœci kodu.
 
 \subsection{Ocena efektywnoœci pracy}
 \label{subsec:ocenaEfektywnosci}
@@ -262,14 +280,15 @@ historiê zmiany plików i pozwala na przejrzyst¹ wizualizacjê zebranych danych.
 	i zapewniaj¹cym komunikacjê miêdzy nimi, przez co jest systemem ³atwo rozszerzalnym. Implementacja 
 	œrodowiska w~Javie zapewnia mu ³atw¹ przenoœnoœæ miêdzy systemami.
 	
-	\subsection{PDE}
+	\subsection{Eclipse PDE}
 	
 	Do œrodowiska Eclipse jest dostarczany plug-in PDE (\textit{Plug-in Development Enviroment}
 	umo¿liwiaj¹cy rozwijanie kolejnych wtyczek do programu Eclipse.
 	
-	\subsection{Zaimplementowane kryteria oceny}
+	\subsection{Zaimplementowane kryteria oceny kodu}
 	
 	W proponowanej wtyczce zosta³y zaimplementowane dwa podstawowe miary pracy programisty LOC i LOCPF.
+	Zosta³y one przedstawione w sekcjach \ref{subsubsec:linieKodu} i \ref{subsubsec:linieKoduNaPlik}.
 	
 	\subsection{Utworzona wtyczka}
 	
