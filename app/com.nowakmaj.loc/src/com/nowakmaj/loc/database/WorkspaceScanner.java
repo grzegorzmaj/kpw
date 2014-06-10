@@ -16,6 +16,8 @@ public class WorkspaceScanner
     
     public ArrayList<FileInfo> scanDir(File dir)
     {
+    	fileHandler.resetTimestamp();
+    	fileInfoList = new ArrayList<FileInfo>();
     	if (dir.isDirectory())
     	{
 	    	scanDirRecursively(dir);

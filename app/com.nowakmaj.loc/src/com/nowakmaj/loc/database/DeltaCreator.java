@@ -72,7 +72,7 @@ public class DeltaCreator {
 			if (nodes.item(i).getNodeName() == "delta")
 				break;
 		}
-		return lastNodeBeforeDelta.getNextSibling().getNextSibling();
+		return lastNodeBeforeDelta.getNextSibling();
 	}
 
 }

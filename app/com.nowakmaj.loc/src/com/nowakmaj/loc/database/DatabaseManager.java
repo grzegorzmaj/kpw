@@ -50,6 +50,7 @@ public class DatabaseManager {
 	
 	public void updateFileInfoInDatabase(ArrayList<FileInfo> fileInfoList)
 	{
+		getFileNodesFromDocument();
 		DeltaCreator deltaCreator = new DeltaCreator(databaseDoc_);
 		for(FileInfo file: fileInfoList)
 		{
@@ -149,8 +150,8 @@ public class DatabaseManager {
 		fileNode.appendChild(locNode);
 		fileNode.appendChild(timestampNode);
 		Node headerNode = databaseDoc_
-			.getFirstChild().getFirstChild().getNextSibling().getNextSibling();
-		databaseDoc_.getLastChild().insertBefore(fileNode, headerNode);
+			.getFirstChild().getFirstChild().getNextSibling();
+		databaseDoc_.getLastChild().insertBefore(fileNode, headerNode.getNextSibling());
 	}
 
 	private Node findTrackedFile(FileInfo file)
@@ -176,6 +177,12 @@ public class DatabaseManager {
 		factory.setIgnoringElementContentWhitespace(true);
 		DocumentBuilder builder = factory.newDocumentBuilder();
 		databaseDoc_ = builder.parse(databaseFile_);
+		getFileNodesFromDocument();
+	}
+	
+	private void getFileNodesFromDocument()
+	{
+		fileNodes_ = new ArrayList<Node>();
 		NodeList filesList = databaseDoc_.getFirstChild().getChildNodes();
 		for (int i = 0; i < filesList.getLength(); ++i)
 			if (filesList.item(i).getNodeName().compareTo("file") == 0)

@@ -11,6 +11,11 @@ public class FileHandler {
 	{
 		timestamp_ = DatabaseInterface.retrieveTimeStamp();
 	}
+	
+	public void resetTimestamp()
+	{
+		timestamp_ = DatabaseInterface.retrieveTimeStamp(); 
+	}
 
 	public FileInfo handleFile(File file)
 	{
