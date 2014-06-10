@@ -31,13 +31,9 @@ public class DatabaseScanner {
 			String projectName) {
 		for (File file: dir.listFiles())
 		{
-			System.out.println(file.getPath());
 			if (file.isDirectory() &&
 				file.getName().compareTo(projectName) == 0)
-			{
-				System.out.println("FOUND!!");
 				projectDir_ = file;
-			}
 			else if (file.isDirectory())
 				findProjectDirectoryFromWorkspaceDirectoryRecursive(
 					file, projectName);

@@ -13,8 +13,10 @@ import org.eclipse.swt.widgets.TabItem;
 import org.eclipse.swt.widgets.Tree;
 import org.eclipse.swt.widgets.TreeColumn;
 import org.eclipse.ui.part.*;
+import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IResourceChangeEvent;
 import org.eclipse.core.resources.IResourceChangeListener;
+import org.eclipse.core.resources.IResourceDelta;
 import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.jface.viewers.*;
@@ -95,7 +97,9 @@ public class LocView extends ViewPart {
 					new java.io.File(workspaceName), name);
 			}
 			databaseFile.add(dbFile);
-			dbInterface.add(new DatabaseInterface(dbFile, projectFile, name));
+			DatabaseInterface dbInterfaceInstance = new DatabaseInterface(dbFile, projectFile, name);
+			dbInterfaceInstance.updateDb();
+			dbInterface.add(dbInterfaceInstance);
 
 		}
 
@@ -111,7 +115,6 @@ public class LocView extends ViewPart {
 	public void createTabs(Composite parent)
 	{
 		tabs = new TabFolder(parent, SWT.BOTTOM);
-
 
 		for(String name: projectNames) 
 		{
@@ -213,22 +216,40 @@ public class LocView extends ViewPart {
 	}
 
 	private void hookSave(){
+		System.out.println("UPDATE");
 		IWorkspace workspace = ResourcesPlugin.getWorkspace();
-		// Example resource listener
-		listener = new IResourceChangeListener() {
+		if (listener == null)
+		{
+			listener = createResourceChangeListener();
+			workspace.addResourceChangeListener(listener, IResourceChangeEvent.POST_CHANGE);
+		}
+	}
+	
+	private IResource findFileInDelta(IResourceDelta delta)
+	{
+		while (delta.getResource().getType() != IResource.FILE)
+			delta = delta.getAffectedChildren()[0];
+		return delta.getResource();
+	}
+	
+	private IResourceChangeListener createResourceChangeListener()
+	{
+		return new IResourceChangeListener() {
+
 			public void resourceChanged(IResourceChangeEvent event) {
-				for (DatabaseInterface data: dbInterface)
+				IResource file = findFileInDelta(event.getDelta());
+				if (file != null && file.getFileExtension().compareTo("java") == 0)
 				{
-					data.updateDb();
+					System.out.println("LISTENER: "+file.getName() + "   " + file.getFullPath());
+					for (DatabaseInterface data: dbInterface)
+						data.updateDb();
+					tabs.dispose();
+//					tabs.redraw();
+					createTabs(_parent);
+					_parent.layout(true);
 				}
-				tabs.dispose();
-				createTabs(_parent);
-				_parent.layout(true);
 			}
-
 		};
-
-		workspace.addResourceChangeListener(listener, IResourceChangeEvent.POST_CHANGE);
 	}
 
 	/**

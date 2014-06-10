@@ -173,6 +173,7 @@ public class DatabaseManager {
 		throws ParserConfigurationException, SAXException, IOException
 	{
 		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+		factory.setIgnoringElementContentWhitespace(true);
 		DocumentBuilder builder = factory.newDocumentBuilder();
 		databaseDoc_ = builder.parse(databaseFile_);
 		NodeList filesList = databaseDoc_.getFirstChild().getChildNodes();
