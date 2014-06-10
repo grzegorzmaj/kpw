@@ -183,11 +183,16 @@ public class LocView extends ViewPart {
 				public void doubleClick(DoubleClickEvent event) {
 					IStructuredSelection selection = (IStructuredSelection) m_treeViewer.getSelection();
 					if (selection.isEmpty()) return;
+					
 
 					Object selectedElement = selection.getFirstElement();
-					File selectedFile = (File) selectedElement;
-
-					showMessage(selectedFile);
+					
+					Item sel = (Item) selectedElement;
+					if(sel.isFile())
+					{
+						File selectedFile = (File) selectedElement;
+						showMessage(selectedFile);
+					}
 				}
 			});
 
@@ -249,47 +254,31 @@ public class LocView extends ViewPart {
 	public void setFocus() {
 		tabs.isFocusControl();
 	}
+	
+	public interface Item
+	{
+		abstract boolean isProject();
+		abstract boolean isFile();
+	}
+	
 
-	class Project{
+	class Project implements Item{
 		File[]	files;
-		int		indx;
+		ArrayList<File> files2 = new ArrayList<File>();
 		private String projName;
 
 		public Project(String name_proj, ArrayList<String> fileNames){
 			projName = name_proj;
 
-			int i=0;
-			int index = 0;
-			int lindex = 0;
-
-			int numFiles=0;
-
-			index = workspaceName.length();
-
 			for (String name: fileNames)
 			{
-				lindex = name.indexOf("/", index+1);
-				String pName = name.substring(index+1, lindex);
-				if(pName.compareTo(projName) == 0)
-				{
-					numFiles++;
-				}
+				java.io.File newFile = new java.io.File(name);
+				if (projScan.isFileFromProject(newFile, projName, workspaceName))
+					files2.add(new File( this, newFile.getParentFile().getName()+"/"+newFile.getName(), newFile.getPath()));
 			}
-
-			files = new File[numFiles];
-			for (String name: fileNames)
-			{
-				index = name.lastIndexOf("/");
-				index = name.lastIndexOf("/", index-1);
-				String fName = name.substring(index+1);
-				index = workspaceName.length();
-				lindex = name.indexOf("/", index+1);
-				String pName = name.substring(index+1, lindex);
-				if(pName.compareTo(projName) == 0)
-				{
-					files[i] = new File(this, i++, fName, name);
-				}
-			}
+			
+			files = files2.toArray(new File[files2.size()]);
+			
 		}
 
 		public File[] getFiles(){
@@ -299,21 +288,29 @@ public class LocView extends ViewPart {
 		public String toString(){
 			return projName;
 		}
+
+		@Override
+		public boolean isProject() {
+			return true;
+		}
+
+		@Override
+		public boolean isFile() {
+			return false;
+		}
 	}
 
 
 
-	class File{
+	class File implements Item{
 		Project project;
-		int	indx;
 		private String name;
 		String fullPath;
 
 
-		public File(Project pro, int i, String name_file, String full){
+		public File(Project pro, String name_file, String full){
 			name = name_file;
 			this.project = pro;
-			indx = i + 1;
 			fullPath = full;
 		}
 
@@ -373,6 +370,16 @@ public class LocView extends ViewPart {
 				return "x";
 			}
 			return null;
+		}
+
+		@Override
+		public boolean isProject() {
+			return false;
+		}
+
+		@Override
+		public boolean isFile() {
+			return true;
 		}
 	}
 
