@@ -197,19 +197,21 @@ public class LocView extends ViewPart {
 
 	private void showMessage(File selectedFile) 
 	{
-		ArrayList<String> dates = new ArrayList<String>();;
+		ArrayList<String> datesLOC = new ArrayList<String>();
+		ArrayList<String> datesLOCPF = new ArrayList<String>();
 		HashMap<String, String> changes = new HashMap<String, String>();
 		HashMap<String, String> changesLocpf = new HashMap<String, String>();
 		for (DatabaseInterface data: dbInterface)
 		{
 			if(data.getProjectName().compareTo(selectedFile.getProject().toString())==0)
 			{
-				dates = data.getLastChangesDatesForFile(selectedFile.getPath(), 100);
+				datesLOC = data.getLastChangesDatesForFile(selectedFile.getPath(), 100);
+				datesLOCPF = data.getLastChangesDates(100);
 				changes = data.getLastChangesOfLOCForFile(selectedFile.getPath(), 100);
 				changesLocpf = data.getLastChangesOfLOCPF(100);
 			}
 		}
-		mydialog dialog = new mydialog(tabs.getShell(), dates, changes, changesLocpf);
+		mydialog dialog = new mydialog(tabs.getShell(), datesLOC, datesLOCPF, changes, changesLocpf);
 		dialog.open();
 	}
 
