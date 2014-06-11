@@ -106,12 +106,17 @@ public class mydialog extends Dialog {
 		IAxis xAxis2 = axisSet2.getXAxis(0);
 		int i2 = 0;
 		double [] values2 = new double[dates2.size()+2];
-
-		values[i2++] = 0;
-		values[dates2.size()+1] = 0; 
+		String [] labels2 = new String[dates2.size()+2];
+		labels2[i2]=" ";
+		 
+		labels2[dates2.size()+1] = " ";
+			
+		values2[i2++] = 0;
+		values2[dates2.size()+1] = 0; 
 		for (String name2: dates2)
 		{
 			values2[i2] = Double.parseDouble(changesLocpf.get(name2));
+			labels2[i2] = Integer.toString(i2);
 			if(values2[i2++]==-1)
 				values2[i2-1]=0;
 		}
@@ -120,7 +125,7 @@ public class mydialog extends Dialog {
 				.createSeries(SeriesType.BAR, "bar series2");
 		barSeries2.setYSeries(values2);
 
-		xAxis2.setCategorySeries(labels);
+		xAxis2.setCategorySeries(labels2);
 		xAxis2.enableCategory(true);
 		
 		// adjust the axis range
