@@ -233,15 +233,9 @@ z przyk³adu pierwszego.
 {Linie kodu na plik Ÿród³owy (LOCPF)}
 \label{subsubsec:linieKoduNaPlik}
 
-Kolejn¹ metryk¹ zwi¹zan¹ z iloœci¹ linii kodu w plikach jest miara iloœci linii kodu na plik.
-Metryka ta jest szczególnie wa¿na ze wzglêdu na to, ¿e zapewnia ewaluacjê projektu programistycznego
-jako ca³oœci. Wa¿ne jest, aby nie wliczaæ do tej metryki plików konfiguracyjnych ani plików 
-wynikowych budowania.
-
-Do wyliczenia LOCPF mo¿na wykorzystaæ metrykê LOC:
-\begin{equation}
-    \frac{1}{N}\sum_{f=1}^NLOC(file\[f\]) \quad f: file\[f\] \in source_files
-\end{equation}
+Kolejn¹ metryk¹ zwi¹zan¹ z iloœci¹ linii kodu w plikach jest miara iloœci linii kodu na plik. Metryka ta
+jest œciœle zwi¹zana ze struktur¹ tworzenia oprogramowania jak¹ jest projekt. Do tej oceny brane s¹ pod
+uwagê pliki Ÿród³owe, a pomijane pliki konfiguracyjnych nie wnosz¹ce nic do oceny jakoœci kodu.
 
 \subsection{Ocena efektywnoœci pracy}
 \label{subsec:ocenaEfektywnosci}
@@ -376,6 +370,10 @@ historiê zmiany plików i pozwala na przejrzyst¹ wizualizacjê zebranych danych.
 			\caption{Widok na okno wykresów LOCPF.}
 			\label{fig:LOCPF}
 		\end{figure}
+
+
+
+
 
 \bibliography{bibliografia01} 
 \addcontentsline{toc}{section}{Bibliografia}
