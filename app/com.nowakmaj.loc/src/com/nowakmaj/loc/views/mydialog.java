@@ -109,7 +109,7 @@ public class mydialog extends Dialog {
 		String [] labels2 = new String[dates2.size()+2];
 		labels2[i2]=" ";
 		 
-		labels2[dates2.size()+1] = " ";
+		//labels2[dates2.size()+1] = " ";
 			
 		values2[i2++] = 0;
 		values2[dates2.size()+1] = 0; 

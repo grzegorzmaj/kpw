@@ -17,6 +17,11 @@ public class DatabaseReader {
 		databaseDoc_ = dbDoc;
 	}
 	
+	public void setDatabaseDoc(Document dbDoc)
+	{
+		databaseDoc_ = dbDoc;
+	}
+	
 	public ArrayList<String> getLastChangesDates(int changesCnt)
 	{
 		ArrayList<String> dateList = new ArrayList<String>();
@@ -51,7 +56,7 @@ public class DatabaseReader {
 	{
 		HashMap<String, String> changesMap = new HashMap<String, String>();
 		ArrayList<String> dates = getLastChangesDatesForFile(
-				filename, changesCnt);
+			filename, changesCnt);
 		Collections.sort(dates);
 		ArrayList<Node> files = findAllFilesForFilename(filename);
 		String lastLoc = "-1";
@@ -67,8 +72,11 @@ public class DatabaseReader {
 	
 	private String getTimestampFromFile(Node file)
 	{
-		return ((Element) file.getLastChild().getPreviousSibling())
-			.getTextContent();
+		NodeList children = file.getChildNodes();
+		for (int i = 0; i < children.getLength(); ++i)
+			if (children.item(i).getNodeName().compareTo("timestamp") == 0)
+				return ((Element) children.item(i)).getTextContent();
+		return "";
 	}
 	
 	private String getLinesOfCodeFromFile(Node file)
@@ -113,7 +121,7 @@ public class DatabaseReader {
 			if (nodes.item(i).getNodeName() == "delta")
 			{
 				NodeList deltaChildren = nodes.item(i).getChildNodes();
-				for (int j = 0; j < deltaChildren.getLength()-1; ++j)
+				for (int j = 0; j < deltaChildren.getLength(); ++j)
 				{
 					if (deltaChildren.item(j).getNodeName() == "file")
 						files.add(deltaChildren.item(j));
