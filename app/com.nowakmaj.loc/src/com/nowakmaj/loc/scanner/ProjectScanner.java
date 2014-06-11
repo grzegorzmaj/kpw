@@ -26,7 +26,7 @@ public class ProjectScanner {
 	{
 		while (file.getPath().compareTo(workspacePath)!=0)
 		{
-			if (file.getName().contains(projectName))
+			if (file.getName().compareTo(projectName)==0)
 				return true;
 			file = file.getParentFile();
 		}

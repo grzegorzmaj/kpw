@@ -22,14 +22,16 @@ import org.eclipse.swt.widgets.TabItem;
 public class mydialog extends Dialog {
 
 
-	ArrayList<String> dates;// = new ArrayList<String>();
-	HashMap<String, String> changes;//= new HashMap<String, String>();
+	ArrayList<String> dates;
+	ArrayList<String> dates2;
+	HashMap<String, String> changes;
 	HashMap<String, String> changesLocpf;
 	TabFolder tabs;
 
-	public mydialog(Shell parentShell, ArrayList<String> Dates, HashMap<String, String> Changes, HashMap<String, String> ChangesLocpf) {
+	public mydialog(Shell parentShell, ArrayList<String> DatesLOC, ArrayList<String> DatesLOCPF, HashMap<String, String> Changes, HashMap<String, String> ChangesLocpf) {
 		super(parentShell);
-		dates = Dates;
+		dates = DatesLOC;
+		dates2 = DatesLOCPF;
 		changes = Changes;
 		changesLocpf = ChangesLocpf;
 	}
@@ -88,7 +90,7 @@ public class mydialog extends Dialog {
 		
 
 		
-		// LOPF tab
+		// LOCPF tab
 		TabItem it2 = new TabItem(tabs, SWT.NONE);
 		it2.setText("LOCPF");
 		Composite container2 = new Composite(tabs, SWT.SINGLE);//(Composite) super.createDialogArea(tabs);
@@ -103,15 +105,15 @@ public class mydialog extends Dialog {
 		IAxisSet axisSet2 = chart2.getAxisSet();
 		IAxis xAxis2 = axisSet2.getXAxis(0);
 		int i2 = 0;
-		double [] values2 = new double[dates.size()+2];
+		double [] values2 = new double[dates2.size()+2];
 
 		values[i2++] = 0;
-		values[dates.size()+1] = 0; 
-		for (String name: dates)
+		values[dates2.size()+1] = 0; 
+		for (String name2: dates2)
 		{
-			values2[i2] = Double.parseDouble(changesLocpf.get(name));
-			if(values2[i++]==-1)
-				values2[i-1]=0;
+			values2[i2] = Double.parseDouble(changesLocpf.get(name2));
+			if(values2[i2++]==-1)
+				values2[i2-1]=0;
 		}
 
 		IBarSeries barSeries2 = (IBarSeries) chart2.getSeriesSet()
