@@ -191,7 +191,6 @@ public class LocView extends ViewPart {
 
 		createTabs(parent);
 
-
 		hookSave();
 	}
 
@@ -240,11 +239,9 @@ public class LocView extends ViewPart {
 				IResource file = findFileInDelta(event.getDelta());
 				if (file != null && file.getFileExtension().compareTo("java") == 0)
 				{
-					System.out.println("LISTENER: "+file.getName() + "   " + file.getFullPath());
 					for (DatabaseInterface data: dbInterface)
 						data.updateDb();
 					tabs.dispose();
-//					tabs.redraw();
 					createTabs(_parent);
 					_parent.layout(true);
 				}
