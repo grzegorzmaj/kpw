@@ -1,11 +1,17 @@
 package com.nowakmaj.loc.database;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
+import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -109,10 +115,10 @@ public class DatabaseManager {
 	private void updateDatabaseFile()
 	{
 		try {
-			NodeList children = databaseDoc_.getFirstChild().getChildNodes();
-			for (int i = 0; i < children.getLength(); ++i)
-				if (children.item(i).getNodeName().compareTo("#text") == 0)
-					children.item(i).setTextContent("");
+//			NodeList children = databaseDoc_.getFirstChild().getChildNodes();
+//			for (int i = 0; i < children.getLength(); ++i)
+//				if (children.item(i).getNodeName().compareTo("#text") == 0)
+//					children.item(i).setTextContent("");
 			Transformer transformer = createXMLTransformer();
 			StreamResult result = new StreamResult(
 				new FileOutputStream(databaseFile_.getAbsolutePath()));
@@ -120,6 +126,42 @@ public class DatabaseManager {
 		} catch (FileNotFoundException | TransformerFactoryConfigurationError
 			| TransformerException e) {
 			e.printStackTrace();
+		}
+		
+		List<String> lines = null;
+		try {
+			lines = Files.readAllLines(Paths.get(databaseFile_.getPath()),
+				Charset.defaultCharset());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		String content = "";
+		for (String line: lines)
+		{
+			line = line.replaceAll("^[ |\t]*\n$", "");
+			if (!line.isEmpty())
+				content += line + "\n";
+		}
+		BufferedWriter writer = null;
+		try
+		{
+		    writer = new BufferedWriter( new FileWriter(databaseFile_.getPath()));
+		    writer.write(content);
+
+		}
+		catch ( IOException e)
+		{
+		}
+		finally
+		{
+		    try
+		    {
+		        if ( writer != null)
+		        writer.close( );
+		    }
+		    catch ( IOException e)
+		    {
+		    }
 		}
 	}
 
