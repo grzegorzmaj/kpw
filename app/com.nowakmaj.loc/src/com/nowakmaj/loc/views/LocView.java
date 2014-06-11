@@ -156,10 +156,9 @@ public class LocView extends ViewPart {
 			m_treeViewer.setContentProvider(new AddressContentProvider());
 			m_treeViewer.setLabelProvider(new TableLabelProvider());
 			List<Project> projects = new ArrayList<Project>();
-			Project newProject = new Project(name, fileNames); 
 
 
-			projects.add(newProject);
+			projects.add(new Project(name, fileNames));
 			m_treeViewer.setInput(projects);
 			m_treeViewer.expandAll();
 			it.setControl(c);
