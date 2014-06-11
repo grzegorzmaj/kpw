@@ -291,13 +291,31 @@ historiê zmiany plików i pozwala na przejrzyst¹ wizualizacjê zebranych danych.
 	\subsection{Zaimplementowane kryteria oceny kodu}
 	
 	W proponowanej wtyczce zosta³y zaimplementowane dwa podstawowe miary pracy programisty LOC i LOCPF.
-	Zosta³y one przedstawione w sekcjach \ref{subsubsec:linieKodu} i \ref{subsubsec:linieKoduNaPlik}.
+	Zosta³y one przedstawione w sekcjach \ref{subsubsec:linieKodu} i~\ref{subsubsec:linieKoduNaPlik}.
 	
 	\subsection{Utworzona wtyczka}
 	
 		\paragraph{Przechowywanie danych\\}
 	
+		Przechowywanie historii zmian plików dla danego projektu odbywa siê poprzez zapisywanie pliku xml.
+		Podczas uruchamiania wtyczki zostaje sprawdzony plik bazy danych projektu, jeœli nie istnieje
+		zostaje utworzony nowy plik xml wraz z odczytem metryk dla stanu zastanego. Nastêpnie z ka¿d¹
+		wprowadzon¹ zmian¹ zostaj¹ zapisane zmiany dla plików które zosta³y zmienione z zapamiêtanym
+		stanem wczeœniejszym dla danego pliku i projektu.
 		
+		Schemat pliku xml sk³ada siê z \textit{headera}, \textit{file} i \textit{delta}. Node
+		\textit{file} odpowiada za opis œledzonych plików i ich stan faktyczny. Ka¿dy plik opisany jest
+		atrybutem \textit{path}, który zawiera pe³n¹ œcie¿kê do pliku, i nodami \textit{loc} i~		
+		\textit{timestamp}, które okreœlaj¹ odpowiednio iloœæ linii pliku i czas w jakim dany opis zosta³
+		zrobiony. Node delta przechowuje kolejne zmiany plików. Jest on okreœlony poprzez atrybuty
+		\textit{changedFilesCount}, mówi¹cy ile plików zosta³o zmienionych, \textit{locpf} okreœlaj¹cy
+		metrykê LOCPF w danej chwili, \textit{timestamp} oznaczaj¹cy czas zapisu i
+		\textit{trackedFilesCount}, który mówi ile plików by³o obserwowanych. W node \textit{delta}
+		wystêpuje te¿ node \textit{file} okreœlaj¹cy pliki, których dotyczy \textit{delta}.
+		
+		Wszystkie zmiany w bazie danych nastêpuj¹ po wykryciu zmiany w plikach przestrzeni roboczej, ale
+		tylko plikach Ÿród³owych przez co nie œledzone s¹ pliki konfiguracyjne projektu, które ulegaj¹
+		zmianie z ka¿d¹ operacj¹ zapisu plików.
 
 		\paragraph{Widok i pos³ugiwanie siê wtyczk¹\\}
 		
