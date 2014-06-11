@@ -1,9 +1,7 @@
 \begin{thebibliography}{1}
 
-\bibitem{Alberts}
-B.~Alberts, D.~Bray, A.~Johnson, J.~Lewis, M.~Raff, K.~Roberts, P.~Walter.
-\newblock {\em {Podstawy biologii komórki. Wprowadzenie do biologii
-  molekularnej}}.
-\newblock {Wydawnictwo Naukowe PWN}, 1999.
+\bibitem{website:metric}
+Jon McCormack,  Damian Conway.
+\newblock Software characteristics and metrics, 2005.
 
 \end{thebibliography}

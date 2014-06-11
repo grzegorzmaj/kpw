@@ -1,3 +1,10 @@
-\begin{thebibliography}{}
+\begin{thebibliography}{1}
+
+\bibitem{website:metric}
+Jon McCormack,  Damian Conway.
+\newblock Software characteristics and metrics.
+\newblock
+  \url{http://www.csse.monash.edu.au/~jonmc/CSE2305/Topics/07.14.SWEng2/html/text.html#what_is_a_metric},
+  2005.
 
 \end{thebibliography}

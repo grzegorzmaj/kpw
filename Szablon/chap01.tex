@@ -16,12 +16,6 @@ Na rynku istniej¹ ró¿ne systemy s³u¿¹ce do pomiaru i wspomagania pracy programis
 g³ównie na ³¹czeniu kodu i kontroli pracy wielu programistów, pracuj¹cych nad jednym projektem. Poni¿ej przedstawione zosta³y najpopularniejsze systemy, w tym rozbudowane i szeroko wykorzystywane systemy otwartoŸród³owe.
 
 \subsection{Systemy kontroli wersji}
-Przyk³adami systemów kontroli wersji s¹ najbardziej popularne darmowe systemy takie jak:
-\begin{itemize}
-	\item Git,
-	\item Svn,
-	\item Mercurial.
-\end{itemize}
 
 Systemy kontroli wersji stworzone s¹ do pomocy przy rozwoju oprogramowania, ich g³ównym zadaniem jest ³¹czenie pracy wielu pracowników jednego projektu, jednak poprzez tworzenie historii zmian w projekcie daje mo¿liwoœæ kontroli i oceny pracy pracowników.
 Daj¹ one mo¿liwoœæ œledzenia postêpu prac poczynionych przez poszczególnych pracowników. Podstawowe informacje, które mo¿na uzyskaæ to:
@@ -44,6 +38,9 @@ Daj¹ one mo¿liwoœæ œledzenia postêpu prac poczynionych przez poszczególnych prac
 
 \end{itemize}
 
+Przyk³adami systemów kontroli wersji s¹ najbardziej popularne darmowe systemy takie jak: Git, Svn czy  Mercurial.
+
+
 
 	\subsubsection{Git}
 	Git jest rozproszonym systemem kontroli wersji. Jest to wolne oprogramowanie udostêpnione na licencji
@@ -56,7 +53,7 @@ Daj¹ one mo¿liwoœæ œledzenia postêpu prac poczynionych przez poszczególnych prac
 	
 	\subsubsection{Mercurial}
 	Marcurial podobnie jak Git jest rozproszonym systemem kontroli wersji. Zosta³ napisany w tym samym
-	czasie jak Git, te¿ w celu pomocy do rozwijania projektu Linux. Jest wykorzystywany w wielu projektach
+	czasie jak Git, równie¿ w celu pomocy do rozwijania projektu Linux. Jest wykorzystywany w wielu projektach
 	otwartoŸród³owych.
 
 \subsection{Systemy zarz¹dzania projektem}
@@ -167,7 +164,7 @@ metrykami oprogramowania. Aby metryka by³a u¿yteczna powinna byæ:
 	\item konsekwentna i obiektywna,
 	\item spójna pod wzglêdem u¿ytych jednostek,
 	\item niezale¿na od jêzyka oprogramowania,
-	\item daj¹ca przydatne informacje\cite{asd}.
+	\item daj¹ca przydatne informacje \cite{website:metric}.
 \end{itemize}
 
 Metryki mo¿na podzieliæ na statyczne i dynamiczne. Metryki statyczne ³¹cz¹ siê œciœle z analiz¹ 
@@ -303,9 +300,10 @@ historiê zmiany plików i pozwala na przejrzyst¹ wizualizacjê zebranych danych.
 		wprowadzon¹ zmian¹ zostaj¹ zapisane zmiany dla plików które zosta³y zmienione z zapamiêtanym
 		stanem wczeœniejszym dla danego pliku i projektu.
 		
-		Schemat pliku xml sk³ada siê z \textit{headera}, \textit{file} i \textit{delta}. Node
-		\textit{file} odpowiada za opis œledzonych plików i ich stan faktyczny. Ka¿dy plik opisany jest
-		atrybutem \textit{path}, który zawiera pe³n¹ œcie¿kê do pliku, i nodami \textit{loc} i~		
+		Struktura pliku xml zawieraj¹cego bazê danych dla wtyczki sk³ada siê z tagów \textit{header},
+		\textit{file} oraz \textit{delta}. Node
+		\textit{file} odpowiada za opis œledzonych plików i ich stan aktualny. Ka¿dy plik opisany jest
+		atrybutem \textit{path}, który zawiera pe³n¹ œcie¿kê do pliku, i node'ami \textit{loc} i~		
 		\textit{timestamp}, które okreœlaj¹ odpowiednio iloœæ linii pliku i czas w jakim dany opis zosta³
 		zrobiony. Node delta przechowuje kolejne zmiany plików. Jest on okreœlony poprzez atrybuty
 		\textit{changedFilesCount}, mówi¹cy ile plików zosta³o zmienionych, \textit{locpf} okreœlaj¹cy
@@ -361,7 +359,7 @@ historiê zmiany plików i pozwala na przejrzyst¹ wizualizacjê zebranych danych.
 		\end{figure}
 		
 		Na drugiej zak³adce zamieszczony jest wykres drugiej miary, mianowicie LOCPF. Iloœæ wyœwietlanych
-		danych jest analogiczna do wykresu wskaŸnika LOC. Widok drugiego wykresy zosta³ zamieszczony na
+		danych jest analogiczna do wykresu wskaŸnika LOC. Widok drugiego wykresu zosta³ zamieszczony na
 		rysunku \ref{fig:LOCPF}.
 
 
@@ -371,8 +369,6 @@ historiê zmiany plików i pozwala na przejrzyst¹ wizualizacjê zebranych danych.
 			\caption{Widok na okno wykresów LOCPF.}
 			\label{fig:LOCPF}
 		\end{figure}
-
-
 
 
 
