@@ -126,8 +126,11 @@ public class DatabaseManager {
 		} catch (FileNotFoundException | TransformerFactoryConfigurationError
 			| TransformerException e) {
 			e.printStackTrace();
-		}
-		
+		}		
+		clearNewLines();
+	}
+
+	public void clearNewLines() {
 		List<String> lines = null;
 		try {
 			lines = Files.readAllLines(Paths.get(databaseFile_.getPath()),
@@ -137,11 +140,10 @@ public class DatabaseManager {
 		}
 		String content = "";
 		for (String line: lines)
-		{
-			line = line.replaceAll("^[ |\t]*\n$", "");
-			if (!line.isEmpty())
+			if (line.compareTo("  ") != 0)
 				content += line + "\n";
-		}
+//		content = content.replaceAll("^[ |\t]*\n$", "");
+		
 		BufferedWriter writer = null;
 		try
 		{

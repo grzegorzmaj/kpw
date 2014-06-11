@@ -12,6 +12,7 @@ public class DatabaseInterface {
 	DatabaseCreator dbCreator_;
 	WorkspaceScanner scanner_;
 	File projectDir_;
+	File dbFile_;
 	String projectName_;
 	
 	public static String retrieveTimeStamp()
@@ -24,9 +25,8 @@ public class DatabaseInterface {
 	public DatabaseInterface(File dbFile, File projectDir, String projectName)
 	{
 		projectDir_ = projectDir;
-		projectName_ = projectName; 
-		dbManager_ = new DatabaseManager(dbFile);
-		dbReader_ = new DatabaseReader(dbManager_.getDatabaseDocument());
+		projectName_ = projectName;
+		dbFile_ = dbFile;
 		scanner_ = new WorkspaceScanner();
 		dbCreator_ = new DatabaseCreator();
 	}
@@ -38,6 +38,8 @@ public class DatabaseInterface {
 	
 	public void updateDb()
 	{
+		dbManager_ = new DatabaseManager(dbFile_);
+		dbReader_ = new DatabaseReader(dbManager_.getDatabaseDocument());
 		dbManager_.updateFileInfoInDatabase(scanner_.scanDir(projectDir_));
 	}
 	
@@ -65,5 +67,10 @@ public class DatabaseInterface {
 	public static void initializeDatabase(File projectDir)
 	{
 		DatabaseCreator.createDatabaseInProjectDir(projectDir);
+	}
+	
+	public void clearNewLines()
+	{
+		dbManager_.clearNewLines();
 	}
 }

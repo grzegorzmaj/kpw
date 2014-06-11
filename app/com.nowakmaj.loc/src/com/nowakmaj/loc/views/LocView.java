@@ -1,6 +1,7 @@
 package com.nowakmaj.loc.views;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.HashMap;
 
@@ -213,13 +214,45 @@ public class LocView extends ViewPart {
 		dialog.open();
 	}
 
-	private void hookSave(){
+	private void hookSave()
+	{
 		System.out.println("UPDATE");
+		
+//		initializeDbInterfaces();
+		
 		IWorkspace workspace = ResourcesPlugin.getWorkspace();
 		if (listener == null)
 		{
 			listener = createResourceChangeListener();
 			workspace.addResourceChangeListener(listener, IResourceChangeEvent.POST_CHANGE);
+		}
+	}
+
+
+
+	private void initializeDbInterfaces() {
+		DatabaseScanner dbScanner = new DatabaseScanner();
+		projectDir = new ArrayList<java.io.File>();
+		databaseFile = new ArrayList<java.io.File>();
+		dbInterface = new ArrayList<DatabaseInterface>();
+		for(String name: projectNames) 
+		{
+			java.io.File projectFile =
+				new java.io.File(workspaceName + java.io.File.separator + name);
+			projectDir.add(projectFile);
+			java.io.File dbFile = dbScanner.findDatabaseForProject(
+				new java.io.File(workspaceName), name);
+			if (dbFile == null)
+			{
+				DatabaseInterface.initializeDatabase(dbScanner.getProjectDir());
+				dbFile = dbScanner.findDatabaseForProject(
+					new java.io.File(workspaceName), name);
+			}
+			databaseFile.add(dbFile);
+			DatabaseInterface dbInterfaceInstance = new DatabaseInterface(dbFile, projectFile, name);
+			dbInterfaceInstance.updateDb();
+			dbInterface.add(dbInterfaceInstance);
+
 		}
 	}
 	
@@ -238,12 +271,17 @@ public class LocView extends ViewPart {
 				IResource file = findFileInDelta(event.getDelta());
 				if (file != null && file.getFileExtension().compareTo("java") == 0)
 				{
-					for (DatabaseInterface data: dbInterface)
-						data.updateDb();
+//					for (DatabaseInterface data: dbInterface)
+//					{
+//						data.updateDb();
+////						data.clearNewLines();
+//					}
+					initializeDbInterfaces();
 					tabs.dispose();
 					createTabs(_parent);
 					_parent.layout(true);
 				}
+				
 			}
 		};
 	}
@@ -337,6 +375,7 @@ public class LocView extends ViewPart {
 				{
 					dates = data.getLastChangesDatesForFile(fullPath, 5);
 					changes = data.getLastChangesOfLOCForFile(fullPath, 5);
+					
 				}
 			}
 
