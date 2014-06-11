@@ -243,6 +243,20 @@ Do wyliczenia LOCPF mo¿na wykorzystaæ metrykê LOC:
     \frac{1}{N}\sum_{f=1}^NLOC(file\[f\]) \quad f: file\[f\] \in source_files
 \end{equation}
 
+\subsubsection[Brak spójnoœci metod (LCOM)][Brak spójnoœci metod (LCOM)]
+{Brak spójnoœci metod (LCOM)}
+Metryka ta bazuje na tezie, ¿e wszystkie metody powinny byæ spójne. St¹d nazwa LCOM (\textit{Lack of 
+Cohesion of Methods}). Spójnoœæ metody oznacza ¿e ma ona jedn¹ kompetencjê i nie wchodzi w
+kompetencje innych metod. Tak organizowany kod jest dobrze zrefaktoryzowany, a przez to ³atwiej
+utrzymywalny, testowalny oraz czytelny.
+
+Spójnoœæ metod (a tak¿e klas i innych obiektów jêzyka) jest cech¹, o której mówi jedna z zasad
+architektury SOLID -- Single Responsibility Principle (SRP). Architektura, która przestrzega zasad
+SOLID cechuje siê du¿¹ stabilnoœci¹ oprogramowania i elastycznym designem\cite{book:agile}.
+
+Jednym z mo¿liwych sposobów obliczania tej metryki jest nastêpuj¹ca formu³a:
+
+
 \subsection{Ocena efektywnoœci pracy}
 \label{subsec:ocenaEfektywnosci}
 Problem oceny efektywnoœci pracy programisty nie jest problemem ³atwym. Dosyæ prosto mo¿na
