@@ -255,10 +255,18 @@ Spójnoœæ metod (a tak¿e klas i innych obiektów jêzyka) jest cech¹, o której mówi
 architektury SOLID -- Single Responsibility Principle (SRP). Architektura, która przestrzega zasad
 SOLID cechuje siê du¿¹ stabilnoœci¹ oprogramowania i elastycznym designem\cite{book:agile}.
 
-Jak wskazuje sama nazwa, metryka ta opisuje brak spójnoœci, a wiêc po¿¹dane jest aby by³a jak
-najmniejsza. Jest kilka sposobów jej obliczania.
-
-
+Jak wskazuje sama nazwa, metryka ta opisuje brak spójnoœci, a wiêc po¿¹dane jest, aby by³a jak
+najmniejsza. Jest kilka sposobów jej obliczania. Definiuje siê:
+\begin{itemize}
+    \item $m$ -- liczba metod w klasie,
+    \item $a$ -- liczba atrybutów w klasie,
+    \item $mA(a)$ -- liczba metod maj¹cych dostêp do atrybutu $a$,
+    \item $sum(mA)$ -- suma wartoœci $mA$ po wszystkich atrybutach.
+\end{itemize}
+Wówczas:
+\begin{equation}
+    LCOM = 1 - \frac{sum(mA)}{m \times a}
+\end{equation}
 
 \subsection{Ocena efektywnoœci pracy}
 \label{subsec:ocenaEfektywnosci}
