@@ -24,7 +24,7 @@ public class ProjectScanner {
 	
 	public boolean isFileFromProject(File file, String projectName, String workspacePath)
 	{
-		while (file.getPath().compareTo(workspacePath)!=0)
+		while (file != null &&  file.getPath().compareTo(workspacePath) !=0 )
 		{
 			if (file.getName().compareTo(projectName)==0)
 				return true;
