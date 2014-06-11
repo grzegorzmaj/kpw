@@ -190,8 +190,7 @@ public class LocView extends ViewPart {
 		_parent = parent;
 
 		createTabs(parent);
-
-
+		
 		hookSave();
 	}
 
@@ -206,7 +205,7 @@ public class LocView extends ViewPart {
 		{
 			if(data.getProjectName().compareTo(selectedFile.getProject().toString())==0)
 			{
-				dates = data.getLastChangesDates(100);
+				dates = data.getLastChangesDatesForFile(selectedFile.getPath(), 100);
 				changes = data.getLastChangesOfLOCForFile(selectedFile.getPath(), 100);
 				changesLocpf = data.getLastChangesOfLOCPF(100);
 			}
