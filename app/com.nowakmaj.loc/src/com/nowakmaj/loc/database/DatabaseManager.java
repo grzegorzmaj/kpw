@@ -84,8 +84,10 @@ public class DatabaseManager {
 		}
 		else
 		{
-			((Element) fileNode.getLastChild().getPreviousSibling())
-				.setTextContent(file.timestamp);
+			NodeList children = fileNode.getChildNodes();
+			for (int i = 0; i < children.getLength(); ++i)
+				if (children.item(i).getNodeName().compareTo("timestamp") == 0)
+					children.item(i).setTextContent(file.timestamp);
 		}
 	}
 
@@ -107,6 +109,10 @@ public class DatabaseManager {
 	private void updateDatabaseFile()
 	{
 		try {
+			NodeList children = databaseDoc_.getFirstChild().getChildNodes();
+			for (int i = 0; i < children.getLength(); ++i)
+				if (children.item(i).getNodeName().compareTo("#text") == 0)
+					children.item(i).setTextContent("");
 			Transformer transformer = createXMLTransformer();
 			StreamResult result = new StreamResult(
 				new FileOutputStream(databaseFile_.getAbsolutePath()));

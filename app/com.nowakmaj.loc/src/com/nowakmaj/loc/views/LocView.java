@@ -194,8 +194,6 @@ public class LocView extends ViewPart {
 		hookSave();
 	}
 
-
-
 	private void showMessage(File selectedFile) 
 	{
 		ArrayList<String> dates = new ArrayList<String>();;
@@ -338,7 +336,7 @@ public class LocView extends ViewPart {
 			{
 				if(data.getProjectName().compareTo(project.toString())==0)
 				{
-					dates = data.getLastChangesDates(5);
+					dates = data.getLastChangesDatesForFile(fullPath, 5);
 					changes = data.getLastChangesOfLOCForFile(fullPath, 5);
 				}
 			}

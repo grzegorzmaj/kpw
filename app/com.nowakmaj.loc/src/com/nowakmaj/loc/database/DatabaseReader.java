@@ -73,8 +73,11 @@ public class DatabaseReader {
 	
 	private String getLinesOfCodeFromFile(Node file)
 	{
-		return ((Element) file.getFirstChild().getNextSibling())
-			.getTextContent();
+		NodeList children = file.getChildNodes();
+		for (int i = 0; i < children.getLength(); ++i)
+			if (children.item(i).getNodeName().compareTo("loc") == 0)
+				return ((Element) children.item(i)).getTextContent();
+		return "";
 	}
 
 	private Node findFileThatMatchesDate(ArrayList<Node> files, String date)
