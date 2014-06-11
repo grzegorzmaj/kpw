@@ -53,6 +53,12 @@ Jon McCormack,  Damian Conway.
   \url{http://www.csse.monash.edu.au/~jonmc/CSE2305/Topics/07.14.SWEng2/html/text.html#what_is_a_metric},
   2005.
 
+\bibitem{book:agile}
+Robert~Cecil Martin.
+\newblock {\em Agile Software Development, Principles, Patterns, and
+  Practices}.
+\newblock Prentice Hall, 2002.
+
 \bibitem{website:eclipse}
 The~Eclipse Foundation.
 \newblock The eclipse foundation opensource community website.
