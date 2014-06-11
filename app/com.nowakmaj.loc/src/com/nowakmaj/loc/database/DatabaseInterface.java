@@ -41,9 +41,14 @@ public class DatabaseInterface {
 		dbManager_.updateFileInfoInDatabase(scanner_.scanDir(projectDir_));
 	}
 	
-	public ArrayList<String> getLastChangesDates(int changesCnt)
-	{
+	public ArrayList<String> getLastChangesDates(int changesCnt) {
 		return dbReader_.getLastChangesDates(changesCnt);
+	}
+	
+	public ArrayList<String> getLastChangesDatesForFile(
+		String filename, int changesCnt)
+	{
+		return dbReader_.getLastChangesDatesForFile(filename, changesCnt);
 	}
 
 	public HashMap<String, String> getLastChangesOfLOCForFile(

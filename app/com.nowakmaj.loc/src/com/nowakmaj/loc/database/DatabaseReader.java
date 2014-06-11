@@ -32,11 +32,26 @@ public class DatabaseReader {
 		return dateList;
 	}
 	
+	public ArrayList<String> getLastChangesDatesForFile(
+		String filename, int changesCnt)
+	{
+		ArrayList<String> dateList = new ArrayList<String>();
+		ArrayList<Node> files = findAllFilesForFilename(filename);
+		for (Node file: files)
+		{
+			if (dateList.size() == changesCnt) break;
+			dateList.add(getTimestampFromFile(file));
+		}
+		Collections.sort(dateList, Collections.reverseOrder());
+		return dateList;
+	}
+	
 	public HashMap<String, String> getLastChangesOfLOCForFile(
 			String filename, int changesCnt)
 	{
 		HashMap<String, String> changesMap = new HashMap<String, String>();
-		ArrayList<String> dates = getLastChangesDates(changesCnt);
+		ArrayList<String> dates = getLastChangesDatesForFile(
+				filename, changesCnt);
 		Collections.sort(dates);
 		ArrayList<Node> files = findAllFilesForFilename(filename);
 		String lastLoc = "-1";
@@ -48,6 +63,12 @@ public class DatabaseReader {
 			changesMap.put(date, lastLoc);
 		}		
 		return changesMap;
+	}
+	
+	private String getTimestampFromFile(Node file)
+	{
+		return ((Element) file.getLastChild().getPreviousSibling())
+			.getTextContent();
 	}
 	
 	private String getLinesOfCodeFromFile(Node file)
