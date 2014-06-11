@@ -1,7 +1,61 @@
-\begin{thebibliography}{1}
+\begin{thebibliography}{10}
+
+\bibitem{website:git}
+Software~Freedom Conservancy.
+\newblock Git --everything is local.
+\newblock \url{http://git-scm.com/}, 2014.
+
+\bibitem{website:svn}
+The Apache~Software Foundation.
+\newblock Apache subversion.
+\newblock \url{http://subversion.apache.org/}, 2014.
+
+\bibitem{website:mercurial}
+punct.
+\newblock Work easier work faster.
+\newblock \url{http://mercurial.selenic.com/}, 2005.
+
+\bibitem{website:redmine}
+Jean-Philippe Lang.
+\newblock Overview redmine.
+\newblock \url{http://www.redmine.org/}, 2014.
+
+\bibitem{website:jira}
+Atlassian.
+\newblock Issue and project tracking software atlassian.
+\newblock \url{https://www.atlassian.com/software/jira}, 2014.
+
+\bibitem{website:github}
+GitHub Inc.
+\newblock Features github.
+\newblock \url{https://github.com/features}, 2014.
+
+\bibitem{website:klocwork}
+Klocwork Inc.
+\newblock Source code analysis tools for software security and reliability
+  klocwork.
+\newblock \url{http://www.klocwork.com/}, 2013.
+
+\bibitem{website:pylint}
+LogiLab.
+\newblock Pylint - code analysis for python.
+\newblock \url{http://www.pylint.org/}, 2014.
+
+\bibitem{website:codesonar}
+GrammaTech Inc.
+\newblock Codesonar static analysis.
+\newblock \url{http://www.grammatech.com/codesonar}, 2014.
 
 \bibitem{website:metric}
 Jon McCormack,  Damian Conway.
-\newblock Software characteristics and metrics, 2005.
+\newblock Software characteristics and metrics.
+\newblock
+  \url{http://www.csse.monash.edu.au/~jonmc/CSE2305/Topics/07.14.SWEng2/html/text.html#what_is_a_metric},
+  2005.
+
+\bibitem{website:eclipse}
+The~Eclipse Foundation.
+\newblock The eclipse foundation opensource community website.
+\newblock \url{http://www.eclipse.org/}, 2014.
 
 \end{thebibliography}
