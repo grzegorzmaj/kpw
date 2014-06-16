@@ -25,5 +25,37 @@ Następnie możemy przejść do rowijania wtyczki. Na górze każdego pliku znaj
 się opis struktury pliku i opisy metod co każda znich robi tak by można je było
 wykorzystać w dalszym projekcie. 
 
+Projekt składa się z trzech pakietów:
+ - com.nowakmaj.loc.database
+ - com.nowakmaj.loc.scanner
+ - com.nowakmaj.loc.views
+
+Na pakiet com.nowakmaj.loc.views składają się dwa pliki:
+ - LocView.java
+ - mydialog.java
+
+Odpowiadają one za prace wtyczki i wyświetlanie graficzne danych.
+
+Na pakiet com.nowakmaj.loc.database składa się 10 plików:
+ - DatabaseCreator.java
+ - DatabaseInterface.java
+ - DatabaseManager.java
+ - DatabaseReader.java
+ - DeltaCreator.java
+ - FileHandler.java
+ - FileInfo.java
+ - FileValidator.java
+ - MetricCalculator.java
+ - WorkspaceScanner.java
+
+Odpowiadają one za tworzenie i przeglądanie bazy danych.
+
+Na pakiet com.nowakmaj.loc.scanner składają się 4 pliki:
+ - DatabaseScanner.java
+ - FileScanner.java
+ - FileValidator.java
+ - ProjectScanner.java
+
+Odpowiadają one za skanowanie workspace i uzyskiwanie listy plików
 
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
