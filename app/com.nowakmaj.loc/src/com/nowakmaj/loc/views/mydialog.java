@@ -54,7 +54,7 @@ public class mydialog extends Dialog {
 		Chart chart = new Chart(container, SWT.NONE);
 		chart.getTitle().setText("Wykres zmian LOC");
 		chart.getAxisSet().getXAxis(0).getTitle().setText("Kolejne zapisy");
-		chart.getAxisSet().getYAxis(0).getTitle().setText("Ilość linii");
+		chart.getAxisSet().getYAxis(0).getTitle().setText("Ilosc linii");
 		IAxisSet axisSet = chart.getAxisSet();
 		IAxis xAxis = axisSet.getXAxis(0);
 		
@@ -101,15 +101,14 @@ public class mydialog extends Dialog {
 		Chart chart2 = new Chart(container2, SWT.NONE);
 		chart2.getTitle().setText("Wykres zmian LOCPF");
 		chart2.getAxisSet().getXAxis(0).getTitle().setText("Kolejne zapisy");
-		chart2.getAxisSet().getYAxis(0).getTitle().setText("Ilość linii na plik");
+		chart2.getAxisSet().getYAxis(0).getTitle().setText("Ilosc linii na plik");
 		IAxisSet axisSet2 = chart2.getAxisSet();
 		IAxis xAxis2 = axisSet2.getXAxis(0);
 		int i2 = 0;
 		double [] values2 = new double[dates2.size()+2];
 		String [] labels2 = new String[dates2.size()+2];
 		labels2[i2]=" ";
-		 
-		//labels2[dates2.size()+1] = " ";
+		labels2[dates2.size()+1] = " ";
 			
 		values2[i2++] = 0;
 		values2[dates2.size()+1] = 0; 
@@ -149,7 +148,7 @@ public class mydialog extends Dialog {
 
 	@Override
 	protected Point getInitialSize() {
-		return new Point(500, 400);
+		return new Point(800, 600);
 	}
 
 
