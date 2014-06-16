@@ -1,0 +1,29 @@
+Politechnika Wrocławska Grzegorz Maj and Michał Nowak
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Opis użytkowania i rozwoju wtyczki Loc View
+
+===============================================================================
+Instalacja
+===============================================================================
+
+Instalacja pluginu polega na przeniesieniu pliku 
+com.nowakmaj.loc_1.0.0.201406161940.jar do folderu dropins, który znajduje się
+w głównym folderze Eclipse. Po tej operacji wtyczka będzie dostępna do 
+uruchomienia w IDE (sposób opisany w raporcie).
+
+===============================================================================
+Dalszy rozwój
+===============================================================================
+
+Należy uruchomić Eclipse i dodać do workspace projekt com.nowakmaj.loc.
+Do poprawnego skonfigurowania projektu trzeba dodać do folderu dropins plik
+org.swtchart_0.9.0.v20140219.jar, umożliwi on tworzenie wykresów we wtyczce.
+
+Następnie możemy przejść do rowijania wtyczki. Na górze każdego pliku znajduje
+się opis struktury pliku i opisy metod co każda znich robi tak by można je było
+wykorzystać w dalszym projekcie. 
+
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
