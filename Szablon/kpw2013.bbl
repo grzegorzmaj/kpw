@@ -1,4 +1,4 @@
-\begin{thebibliography}{1}
+\begin{thebibliography}{10}
 
 \bibitem{website:git}
 Software~Freedom Conservancy.
@@ -15,15 +15,30 @@ punct.
 \newblock Work easier work faster.
 \newblock \url{http://mercurial.selenic.com/}, 2005.
 
+\bibitem{website:redmine}
+Jean-Philippe Lang.
+\newblock Overview redmine.
+\newblock \url{http://www.redmine.org/}, 2014.
+
+\bibitem{website:jira}
+Atlassian.
+\newblock Issue and project tracking software atlassian.
+\newblock \url{https://www.atlassian.com/software/jira}, 2014.
+
+\bibitem{website:github}
+GitHub Inc.
+\newblock Features github.
+\newblock \url{https://github.com/features}, 2014.
+
 \bibitem{website:klocwork}
 Klocwork Inc.
-\newblock Source code analysis tools for software security & reliability |
+\newblock Source code analysis tools for software security and reliability
   klocwork.
 \newblock \url{http://www.klocwork.com/}, 2013.
 
 \bibitem{website:pylint}
 LogiLab.
-\newblock Pylint - code analysis for python | www.pylint.org.
+\newblock Pylint - code analysis for python.
 \newblock \url{http://www.pylint.org/}, 2014.
 
 \bibitem{website:codesonar}
@@ -37,6 +52,12 @@ Jon McCormack,  Damian Conway.
 \newblock
   \url{http://www.csse.monash.edu.au/~jonmc/CSE2305/Topics/07.14.SWEng2/html/text.html#what_is_a_metric},
   2005.
+
+\bibitem{book:agile}
+Robert~Cecil Martin.
+\newblock {\em Agile Software Development, Principles, Patterns, and
+  Practices}.
+\newblock Prentice Hall, 2002.
 
 \bibitem{website:eclipse}
 The~Eclipse Foundation.

@@ -301,9 +301,9 @@ historiê zmiany plików i pozwala na przejrzyst¹ wizualizacjê zebranych danych.
 
 	\subsection{Eclipse IDE}
 	
-	Eclipse \cite{website:eclipse} otwartoŸród³ow¹ platform¹ na bazie której zosta³o stworzone zintegrowane œrodowisko
-	programistyczne, g³ównie wykorzystywane do tworzenia projektów w jêzyku Java, ale umo¿liwia
-	wykorzystanie te¿ innych popularnych jêzyków programowania. 
+	Eclipse \cite{website:eclipse} otwartoŸród³ow¹ platform¹ na bazie której zosta³o stworzone 
+	zintegrowane œrodowisko programistyczne, g³ównie wykorzystywane do tworzenia projektów w jêzyku Java,
+	ale umo¿liwia wykorzystanie te¿ innych popularnych jêzyków programowania. 
 	
 	Samo œrodowisko Eclipse nie posiada narzêdzi do tworzenia oprogramowania, a obs³uguje wtyczki
 	rozszerzaj¹ce mo¿liwoœci platformy. Tak wiêc Eclipse jest tylko programem obs³uguj¹cym wtyczki
@@ -343,7 +343,7 @@ historiê zmiany plików i pozwala na przejrzyst¹ wizualizacjê zebranych danych.
 		metrykê LOCPF w danej chwili, \textit{timestamp} oznaczaj¹cy czas zapisu i
 		\textit{trackedFilesCount}, który mówi ile plików by³o obserwowanych. W node \textit{delta}
 		wystêpuje te¿ node \textit{file} okreœlaj¹cy pliki, których dotyczy \textit{delta}.
-		
+		pars
 		Wszystkie zmiany w bazie danych nastêpuj¹ po wykryciu zmiany w plikach przestrzeni roboczej, ale
 		tylko plikach Ÿród³owych przez co nie œledzone s¹ pliki konfiguracyjne projektu, które ulegaj¹
 		zmianie z ka¿d¹ operacj¹ zapisu plików.
@@ -402,6 +402,24 @@ historiê zmiany plików i pozwala na przejrzyst¹ wizualizacjê zebranych danych.
 			\caption{Widok na okno wykresów LOCPF.}
 			\label{fig:LOCPF}
 		\end{figure}
+
+\section{Podsumowanie}
+\label{sec:podsumowanie}
+
+Zaproponowane rozwi¹zanie pozwala œledziæ historiê dwóch wskaŸników: linii kodu w pliku i œredniej iloœci
+linii kodu na plik w projekcie. Sposób wizualizacji pozwala w ³atwy sposób œledziæ rozwój projektu i obserwowaæ nie tylko ostatnie zmiany ale równie¿ du¿o wczeœniejsze etapy pracy.
+
+Jako strukturê bazê danych wybrano plik xml. Takie podejœcie umo¿liwia prosty i czytelny zapis zmian. Wykorzystanie pliku xml, ³atwego do analizy, pozwala na wykorzystanie budowanej bazy nie tylko w tej wtyczce, ale mog¹ go wykorzystywaæ inne programy badaj¹ce prace programisty.
+
+Dla bazy danych przyjêto model addytywny, tzn. ka¿da kolejna zmiana pliku zostaje dopisana nowym elementem 
+w pliku xml. Takie rozwi¹zanie jest proste w z³o¿eniach i ³atwe do analizy jednak dla du¿ej iloœci zmian
+wielkoœæ pliku mo¿e znacznie wzrosn¹æ, co nie jest dobrym zjawiskiem. Problemem przy przetwarzaniu bazy mo¿e byæ te¿ jej rozmiar. Poniewa¿ wtyczka na bie¿¹co aktualizuje wyœwietlane dane, dla bardzo du¿ej bazy danych analiza mo¿e zaj¹æ zbyt du¿o czasu, aby zapewniæ p³ynn¹ pracê programu. Rozwi¹zaniem tego problemu
+mo¿e byæ zmiana u³o¿enia nowych wpisów do bazy danych, tak by paser nie musia³ analizowaæ ca³ego pliku a
+jedynie ostatnie n ¿¹danych zmian.
+
+Utworzona wtyczka jest dobrym narzêdziem do œledzenia ci¹g³ego postêpu prac na poziomie, którego nie 
+udostêpniaj¹ nam systemy kontroli wersji czy platformy zarz¹dzania projektem, które analizuj¹ czêœci kodu 
+przesy³ane w wiêkszych czêœciach.
 
 
 
