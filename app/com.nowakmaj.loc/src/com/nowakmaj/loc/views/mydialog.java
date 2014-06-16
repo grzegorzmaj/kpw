@@ -1,3 +1,18 @@
+/*
+ * Plik mydialog.java z paczki com.nowakmaj.loc.views
+ * 
+ * Klasa mydialog odpowida za nowe okna wyświetlające wykresy.
+ * 
+ * dates - lista dat zmian dla danego pliku
+ * dates2 - lista dat zmian wszytskich w tym projekcie
+ * changes - mapa zmian dla danego pliku
+ * changesLocpf - mapa zmian LocPF dla projektu
+ * tabs - zakładki
+ * 
+ * Poszczególne metody opisane są w kodzie.
+ * 
+ * */
+
 package com.nowakmaj.loc.views;
 
 import java.util.ArrayList;
@@ -18,6 +33,9 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.TabFolder;
 import org.eclipse.swt.widgets.TabItem;
 
+/* 
+* Klasa mydialog jest rozszerzeniem Dialog umożliwia to wyświetlanie okna.
+* */
 
 public class mydialog extends Dialog {
 
@@ -28,6 +46,9 @@ public class mydialog extends Dialog {
 	HashMap<String, String> changesLocpf;
 	TabFolder tabs;
 
+	/* 
+	 * Konstruktor.
+	 */
 	public mydialog(Shell parentShell, ArrayList<String> DatesLOC, ArrayList<String> DatesLOCPF, HashMap<String, String> Changes, HashMap<String, String> ChangesLocpf) {
 		super(parentShell);
 		dates = DatesLOC;
@@ -36,6 +57,12 @@ public class mydialog extends Dialog {
 		changesLocpf = ChangesLocpf;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see org.eclipse.jface.dialogs.Dialog#createDialogArea(org.eclipse.swt.widgets.Composite)
+	 * 
+	 * createDialogArea tworzy obszar wykresu.
+	 */
 	@Override
 	protected Control createDialogArea(Composite parent) {
 		Composite c = (Composite) super.createDialogArea(parent);
@@ -138,14 +165,25 @@ public class mydialog extends Dialog {
 		return c;
 	}
 
-	// overriding this methods allows you to set the
-	// title of the custom dialog
+	
+	/*
+	 * (non-Javadoc)
+	 * @see org.eclipse.jface.window.Window#configureShell(org.eclipse.swt.widgets.Shell)
+	 * 
+	 * configureShell umożliwia zmianę tytułu okna.
+	 */
 	@Override
 	protected void configureShell(Shell newShell) {
 		super.configureShell(newShell);
 		newShell.setText("Chart Information");
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see org.eclipse.jface.dialogs.Dialog#getInitialSize()
+	 * 
+	 * getInitialSize ustawia początkowy rozmiar okna.
+	 */
 	@Override
 	protected Point getInitialSize() {
 		return new Point(800, 600);

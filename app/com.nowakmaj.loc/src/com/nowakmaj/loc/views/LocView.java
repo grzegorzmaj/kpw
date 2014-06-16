@@ -1,7 +1,24 @@
+/*
+ * Plik LocView.java z paczki com.nowakmaj.loc.views
+ * 
+ * Klasa LocView odpowida za całą pracę wtyczki.
+ * 
+ * projectNames   - przechowuje nazwy projektów w workspace
+ * fileNames	   - przegowuje wszytskie nawy plików w workspace
+ * projScan	   - skaner projektów
+ * workspace	   - wskaźnik na folder workspace
+ * workspaceName  - nazwa folderu workspace
+ * projectDir	   - lista folderów projektów
+ * databaseFile   - lista pliów baz danych
+ * dbInterface    - lista interfejsów do analizy plików
+ * 
+ * Poszczególne metody opisane są w kodzie.
+ * 
+ * */
+
 package com.nowakmaj.loc.views;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.HashMap;
 
@@ -25,6 +42,10 @@ import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.ui.*;
 import org.eclipse.swt.SWT;
+
+/* 
+ * Klasa LocView jest rozszerzeniem ViewPart umożliwia to nowy widok w eclipse
+ * */
 
 public class LocView extends ViewPart {
 
@@ -103,15 +124,12 @@ public class LocView extends ViewPart {
 			dbInterface.add(dbInterfaceInstance);
 
 		}
-
-		//		System.out.println(workspaceName);
 	}
 
 
 
 	/**
-	 * This is a callback that will allow us
-	 * to create the viewer and initialize it.
+	 * Tworzenie zakładek w widoku LocView
 	 */
 	public void createTabs(Composite parent)
 	{
@@ -186,12 +204,22 @@ public class LocView extends ViewPart {
 		tabs.setSelection(0);
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see org.eclipse.ui.part.WorkbenchPart#createPartControl(org.eclipse.swt.widgets.Composite)
+	 * 
+	 * Utworzenie widoku 
+	 */
 	public void createPartControl(Composite parent) {
 		_parent = parent;
 
 		createTabs(parent);
 		hookSave();
 	}
+	
+	/*
+	 * Metoda showMessage otwiera nowe okno z wykresami LoC i LoCPF
+	 */
 
 	private void showMessage(File selectedFile) 
 	{
@@ -213,11 +241,11 @@ public class LocView extends ViewPart {
 		dialog.open();
 	}
 
+	/*
+	 * metoda hookSave przechwytuje zdarzenie zmiany plików
+	 */
 	private void hookSave()
 	{
-		System.out.println("UPDATE");
-		
-//		initializeDbInterfaces();
 		
 		IWorkspace workspace = ResourcesPlugin.getWorkspace();
 		if (listener == null)
@@ -226,8 +254,10 @@ public class LocView extends ViewPart {
 			workspace.addResourceChangeListener(listener, IResourceChangeEvent.POST_CHANGE);
 		}
 	}
-
-
+	
+	/*
+	 * initializeDbInterfaces() inicjalizuje interfejs bazy danych
+	 */
 
 	private void initializeDbInterfaces() {
 		DatabaseScanner dbScanner = new DatabaseScanner();
@@ -255,12 +285,21 @@ public class LocView extends ViewPart {
 		}
 	}
 	
+	/*
+	 * findFileInDelta szuka zmienionego pliku w bazie danych
+	 */
+	
 	private IResource findFileInDelta(IResourceDelta delta)
 	{
 		while (delta.getResource().getType() != IResource.FILE)
 			delta = delta.getAffectedChildren()[0];
 		return delta.getResource();
 	}
+	
+	/*
+	 * createResourceChangeListener() tworzy nowy listener do zmian plików 
+	 * zorientowany na pliki java
+	 */
 	
 	private IResourceChangeListener createResourceChangeListener()
 	{
@@ -270,11 +309,7 @@ public class LocView extends ViewPart {
 				IResource file = findFileInDelta(event.getDelta());
 				if (file != null && file.getFileExtension().compareTo("java") == 0)
 				{
-//					for (DatabaseInterface data: dbInterface)
-//					{
-//						data.updateDb();
-////						data.clearNewLines();
-//					}
+
 					initializeDbInterfaces();
 					tabs.dispose();
 					createTabs(_parent);
@@ -292,12 +327,20 @@ public class LocView extends ViewPart {
 		tabs.isFocusControl();
 	}
 	
+	/*
+	 * Sprawdzenie czy zaznaczenie jest plikiem czy projektem
+	 */
+	
 	public interface Item
 	{
 		abstract boolean isProject();
 		abstract boolean isFile();
 	}
 	
+	/*
+	 * Klasa Project przechowuje dane o projkecie wyśwetlane w podstawowym 
+	 * widoku wtyczki. Jest potrzebna do tworzenia rozwijalnego drzewa.
+	 */
 
 	class Project implements Item{
 		File[]	files;
@@ -338,6 +381,10 @@ public class LocView extends ViewPart {
 	}
 
 
+	/*
+	 * Kasa File przechowuje dane o plikach wyświetlane w podstawowym widoku
+	 * wtyczki. Jest potrzebna do tworzenia rozwijalnego drzewa.
+	 */
 
 	class File implements Item{
 		Project project;
