@@ -1,3 +1,6 @@
+/**
+ * com.nowakmaj.loc.scanner.ProjectScanner
+ */
 package com.nowakmaj.loc.scanner;
 
 import java.io.File;
@@ -11,10 +14,19 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
 
+/**
+ * Skanuje workspace w poszukiwaniu projektow.
+ */
 public class ProjectScanner {
 	
+	/**
+	 * Walidator dla projektow (plikow .proj)
+	 */
 	private FileValidator validator_;
 	
+	/**
+	 * Konstruktor.
+	 */
 	public ProjectScanner()
 	{
 		ArrayList<String> ext = new ArrayList<String>();
@@ -22,6 +34,14 @@ public class ProjectScanner {
 		validator_ = new FileValidator(ext);
 	}
 	
+	/**
+	 * Sprawdza czy plik nalezy do danego projektu
+	 *
+	 *	@param plik
+	 *	@param nazwa projektu
+	 *	@param katalog wrokspace'u
+	 *	@return true jesli nalezy, false jesli nie
+	 */
 	public boolean isFileFromProject(File file, String projectName, String workspacePath)
 	{
 		while (file != null &&  file.getPath().compareTo(workspacePath) !=0 )
@@ -33,6 +53,12 @@ public class ProjectScanner {
 		return false;
 	}
 	
+	/**
+	 * Zwraca nazwy plikow projektow dla danego katalogu.
+	 *
+	 *	@param katalog
+	 *	@return lista nazw plikow projektow
+	 */
 	public ArrayList<String> getProjectNames(File dir)
 	{
 		ArrayList<File> files = getFiles(dir);

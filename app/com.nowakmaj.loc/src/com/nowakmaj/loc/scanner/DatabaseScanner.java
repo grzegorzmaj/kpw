@@ -1,11 +1,27 @@
+/**
+ * com.nowakmaj.loc.scanner.DatabaseScanner
+ */
 package com.nowakmaj.loc.scanner;
 
 import java.io.File;
 
+/**
+ * Skanuje workspace w poszukiwaniu plikow z bazami danych.
+ */
 public class DatabaseScanner {
 	
+    /**
+     * Plik z projektem.
+     */
 	private File projectDir_;
 	
+    /**
+     * Szuka plik z baza danych dla podanego projektu.
+     *
+     *  @param katalog z workspace'm
+     *  @param nazwa projektu
+     *  @return plik bazy danych
+     */
 	public File findDatabaseForProject(File workspaceDir, String projectName)
 	{
 		findProjectDirectoryFromWorkspaceDirectory(workspaceDir, projectName);
@@ -15,6 +31,11 @@ public class DatabaseScanner {
 		return null;
 	}
 	
+    /**
+     * Szuka plik z baza danych dla podanego projektu.
+     *
+     *  @return plik projetku
+     */
 	public File getProjectDir()
 	{
 		return projectDir_;
